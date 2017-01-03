@@ -1,0 +1,117 @@
+
+<md-dialog arial-label="Detil">
+	<form ng-cloak>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>COA - Detil</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click='tutupDetil()'>
+		        <md-icon md-svg-src="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg" aria-label="Close dialog" ></md-icon>
+		    </md-button>
+		</div>
+	</md-toolbar>
+	<md-dialog-content   >
+	<!-- style="width:900px;height:500px; "> -->
+		<div class="md-dialog-content">
+			<div layout="column" >
+				<div layout="row">
+					<md-input-container flex="10">
+						<label>ID</label>
+						<input type='text' ng-disabled='true' id="idCoaDtl" ng-model='coaDtl.idAccountDtl' />
+					</md-input-container>	
+					<md-input-container flex="30">
+						<label>Kode </label>
+						<input type='text' ng-model='coaDtl.kodePerkiraan'  id="kode" md-autofocus/>
+					</md-input-container>
+			        <md-input-container flex="60">
+			        	<label>Nama</label>
+			        	<input type='text' ng-model='coaDtl.namaPerkiraan'   /> 
+			        </md-input-container>
+		        </div>
+		        <div layout="row">
+		        	<div flex=70>
+			        	<md-autocomplete
+			        		ng-model="coaDtl.accountHeader"					        		
+							md-no-cache="true"
+							md-selected-item="selectedItem"
+							md-search-text="searchText"
+							md-items="coaHdr in getCoaHdrByKode(searchText)"
+							md-item-text="coaHdr.namaAccount"
+							md-min-length="0"
+							md-autoselect="true"
+							md-floating-label="Kode COA Header "							
+							>
+							<md-item-template>
+								<span md-highlight-text="searchText" md-highlight-flags="^i">[{{coaHdr.kodeAccount}}]-{{coaHdr.namaAccount}}</span>
+							</md-item-template>
+							<md-not-found>
+								Tidak ditemukan
+							</md-not-found>
+						</md-autocomplete>						
+		        	</div>
+		        	<md-input-container flex="60">
+			        	<label>Kode</label>
+			        	<input type='text' ng-model='selectedItem.kodeAccount' disabled/> 
+			        </md-input-container>		        	
+		        </div>
+
+		        <div layout="row">
+					<div flex=25>
+						<md-switch ng-model="coaDtl.rel" aria-label="rel" 	class="md-primary">
+    						relation
+  						</md-switch>					
+					</div>
+					<div flex=25>
+						<md-switch ng-model="coaDtl.cust" aria-label="cust" class="md-primary">
+    						customer
+  						</md-switch>					
+					</div>
+					<div flex=25>
+						<md-switch ng-model="coaDtl.cashBank" aria-label="kasbank" class="md-primary">
+    						Cash/bank
+  						</md-switch>					
+					</div>
+					<md-input-container flex>
+			        	<label>Status</label>
+			        	<md-select ng-model="coaDtl.status">
+			        		<md-option ng-repeat="status1 in listStatus" ng-value="status1">
+			        			{{status1}}
+			        		</md-option>
+			        	</md-select>
+			        </md-input-container>
+		        </div>
+
+		        <div layout="row">
+		        	<md-input-container flex=25>
+			        	<label>Posisi</label>
+			        	<md-select ng-model="posisi">
+			        		<md-option ng-repeat="DK in listDK " ng-value="DK">
+			        			{{DK}}
+			        		</md-option>
+			        	</md-select>
+			        </md-input-container>
+			        <div flex=25>
+						<md-switch ng-model="cb4" aria-label="kasbank" class="md-warn">
+    						Auto header
+  						</md-switch>					
+					</div>			
+					<md-input-container flex="50">
+						<label>Header</label>
+						<input type='text' ng-model='coaDtl.kode'  id="kode" />
+					</md-input-container>					
+		        </div>
+			</div>		
+		</div>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<span flex></span>		
+  		<md-button class="md-raised md-primary" ng-click='proses()'" aria-label="okay">   			
+   			<md-icon md-svg-src="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_36px.svg" ></md-icon>
+  		</md-button>  		
+  		<md-button class="md-raised md-warn" ng-click='tutupDetil()'>
+    		Close
+  		</md-button>		
+	</md-dialog-action>
+	</form>
+
+</md-dialog>

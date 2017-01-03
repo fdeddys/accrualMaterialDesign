@@ -1,0 +1,40 @@
+<div >
+	<md-bottom-sheet class="md-list md-has-header" style="background-color:whitesmoke ">   
+	  <md-list ng-cloak flex layout="row" layout-align="center center">
+	    <md-list-item  >
+      		<md-button
+          		ng-click="openJurnal()"
+          		class="md-list-item-content md-primary md-hue-1" >
+        	<md-icon md-svg-icon="images/material-design-icons-3.0.1/maps/svg/production/ic_directions_run_24px.svg" ></md-icon>
+        	<span class="md-inline-list-icon-label">Jurnal</span>
+      		</md-button>
+
+	    	<md-menu>
+		    	<md-button
+		        	ng-click="openMenu($mdOpenMenu, $event)"         
+		          	class="md-list-item-content md-primary md-hue-1" >
+		     	<md-icon md-svg-icon="images/material-design-icons-3.0.1/maps/svg/production/ic_directions_run_24px.svg" ></md-icon>
+	        	<span class="md-inline-list-icon-label">Posting</span>
+	      		</md-button>
+	      		<md-menu-content width="2">
+	      			<md-menu-item>
+	      				<md-button ng-click="postJurnalPenerimaan()">Penerimaan / Pemindahan</md-button>
+	      			</md-menu-item>
+	      			<md-menu-item>
+	      				<md-button ng-click="postJurnalPengeluaran()">Pengeluaran</md-button>
+	      			</md-menu-item>
+	      		</md-menu-content>
+			</md-menu>
+
+	      		<md-button
+	          		ng-click="listItemClick($index)"        
+	          		class="md-list-item-content" >
+	        	<md-icon md-svg-icon="images/material-design-icons-3.0.1/maps/svg/production/ic_directions_run_24px.svg" ></md-icon>
+	        	<span class="md-inline-list-icon-label">Logout</span>
+	      		</md-button>
+
+	    </md-list-item>
+	  </md-list>
+	</md-bottom-sheet>
+	
+</div>

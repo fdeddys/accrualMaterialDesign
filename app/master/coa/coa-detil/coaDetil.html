@@ -1,0 +1,90 @@
+<!-- <h4 style='color:green; background-color:lightgreen' >Input / Edit Data Direktorat</h4> -->
+<md-card>
+	<md-card-content>
+		<md-toolbar class="md-table-toolbar md-default" ng-show="!showCari" >
+			<div class="md-toolbar-tools">
+				<h4>COA Detil</h4> 
+				<span flex></span>
+				<!-- md-fab md-mini md-icon-button md-accent md-primary-->
+				<md-button class="md-fab md-mini md-primary md-hue-2  " aria-label="loadIsi" ng-click="loadIsi()">
+					<md-tooltip>
+		            	Cari data
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_swap_horiz_24px.svg"></md-icon>
+				</md-button>			
+				<md-button class="md-fab md-mini md-primary md-hue-2 " aria-label="tambah" ng-click="addNew($event)">
+					<md-tooltip>
+		            	Tambah
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/av/svg/production/ic_playlist_add_48px.svg"></md-icon>
+				</md-button>
+				<md-button class="md-fab md-mini md-primary md-hue-2" aria-label="preview" ng-click='previewLaporan()'>
+					<md-tooltip>
+		            	Cetak
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+
+		<md-toolbar class="md-table-toolbar md-default" ng-show="showCari">
+			<br>
+			<div class="md-toolbar-tools">
+				<md-input-container>
+					<label>kode </label>
+					<input id='idCariKode' type='text' ng-model='searchKode' ng-change='getAll()' >
+				</md-input-container>	
+				<md-input-container>
+					<label>Nama </label>
+					<input id='idCariNama' type='text' ng-model='searchNama' ng-change='getAll()' >
+				</md-input-container>	
+				<!-- <span flex></span> -->
+				<p>
+					<md-button class="md-fab md-mini md-primary md-hue-2 " aria-label="tutup" ng-click="loadIsi()">
+						<md-icon md-svg-icon="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg"></md-icon>
+					</md-button>			
+				</p>
+			</div>
+		</md-toolbar>
+
+		<md-table-container>
+			<table md-table  >
+				<thead md-head  >
+					<tr md-row>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Group</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Ket</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>kode</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)"><span>Nama</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)"><span>D/K</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)"><span>Rel</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)"><span>Cust</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)"><span>Kas/bank</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)"><span>Action</span> </th> 
+					</tr>	
+				</thead>
+				<tbody md-body>
+					<tr md-row md-select-id="kode" ng-repeat='coa in coas ' >
+						<td md-cell>{{coa.accountHeader.kodeAccount }}</td>			
+						<td md-cell>{{coa.accountHeader.namaAccount | uppercase}}</td>			
+						<td md-cell>{{coa.kodePerkiraan }}</td>				
+						<td md-cell>{{coa.namaPerkiraan | uppercase}}</td>
+						<td md-cell><div ng-if="coa.isDebet">DEBET</div><div ng-if="!coa.isDebet">KREDIT</div></td>
+						<td md-cell><div ng-if="coa.rel"><md-icon md-svg-icon="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_18px.svg" style="color:rgb(0, 0, 255)" ></md-icon></div></td>	
+						<td md-cell><div ng-if="coa.cust"><md-icon md-svg-icon="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_18px.svg" style="color:rgb(0, 0, 255)" ></md-icon></div></td>	
+						<td md-cell><div ng-if="coa.cashBank"><md-icon md-svg-icon="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_18px.svg" style="color:rgb(0, 0, 255)" ></md-icon></div></td>							
+						<td md-cell>
+							<md-button class="md-warn" ng-click='edit(coa.idAccountDtl,$event)'>Edit
+							<md-tooltip>
+				            	{{coa.kodePerkiraan}} - {{coa.namaPerkiraan}}
+				          	</md-tooltip>
+		          			</md-button>							
+						</td>			
+					</tr>		
+				</tbody>
+			</table>			
+		</md-table-container>
+		<md-table-pagination md-limit="itemsPerPage" md-page="currentPage" md-total="{{totalItems}}" md-on-paginate="getAll" ></md-table-pagination>
+	</md-card-content>
+</md-card>
+
+

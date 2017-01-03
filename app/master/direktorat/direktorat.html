@@ -1,0 +1,89 @@
+<!-- <h4 style='color:green; background-color:lightgreen' >Input / Edit Data Direktorat</h4> -->
+<md-card>
+	<!-- <md-card-title>
+		<md-card-title-text>
+			<span class="md-headline">Master Direktorat</span>
+			<span class="ms-subhead">Tambah dan ubah data direktorat</span>
+		</md-card-title-text>
+	</md-card-title> -->
+
+	<md-card-content>
+		<md-toolbar class="md-table-toolbar md-default" ng-show="!showCari" >
+			<div class="md-toolbar-tools">
+				<h4>Direktorat</h4> 
+				<span flex></span>
+				<!-- md-fab md-mini md-icon-button md-accent md-primary-->
+				<md-button class="md-fab md-mini md-primary md-hue-2  " aria-label="loadIsi" ng-click="loadIsi()">
+					<md-tooltip>
+		            	Cari data
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_swap_horiz_24px.svg"></md-icon>
+				</md-button>			
+				<md-button class="md-fab md-mini md-primary md-hue-2 " aria-label="tambah" ng-click="addNew($event)">
+					<md-tooltip>
+		            	Tambah
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/av/svg/production/ic_playlist_add_48px.svg"></md-icon>
+				</md-button>
+				<md-button class="md-fab md-mini md-primary md-hue-2" aria-label="preview" ng-click='previewLaporan()'>
+					<md-tooltip>
+		            	Cetak
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+
+		<md-toolbar class="md-table-toolbar md-default" ng-show="showCari">
+			<br>
+			<div class="md-toolbar-tools">
+				<md-input-container>
+					<label>Nama Direktorat</label>
+					<input id='idCari' type='text' ng-model='search' ng-change='getAll()' >
+				</md-input-container>	
+				<!-- <span flex></span> -->
+				<p>
+					<md-button class="md-fab md-mini md-primary md-hue-2 " aria-label="tutup" ng-click="loadIsi()">
+						<md-icon md-svg-icon="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg"></md-icon>
+					</md-button>			
+				</p>
+			</div>
+		</md-toolbar>
+<!-- 		<div layout="row">
+			<md-card-actions layout="row" layout-align="end center">
+				<md-button class="md-raised md-primary" ng-click='tambahDirektorat()'>Add New</md-button>
+				<md-button class="md-raised md-warning" ng-click='previewLaporan()'>Preview</md-button>
+			</md-card-actions>
+		</div> -->
+		<md-table-container>
+			<table md-table ng-model="selected" md-progress="promise" >
+				<thead md-head md-order="direktorat.kode" >
+					<tr md-row>
+						<th md-column md-order-by="nameToLower" style="color:rgb(128, 255, 128)" ><span>Kode</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)"><span>Nama</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)"><span>Action</span> </th> 
+						<!-- <td width="10%"></td> -->
+					</tr>	
+				</thead>
+				<tbody md-body>
+					<tr md-row md-select="direktorat" md-select-id="kode" ng-repeat='direktorat in direktorats ' >
+						<td md-cell>{{direktorat.kode | uppercase}}</td>				
+						<td md-cell>{{direktorat.nama | uppercase}}</td> 
+						<td md-cell>
+							<md-button class="md-warn" ng-click='edit(direktorat.id,$event)'>Edit
+							<md-tooltip>
+				            	{{direktorat.kode}} - {{direktorat.nama}}
+				          	</md-tooltip>
+		          			</md-button>							
+						</td>
+						<!-- <td><button type='button' class='btn btn-danger btn-block btn-sm'
+							ng-click='hapusDirektorat(direktorat.id,$index)'
+							>Delete</button> -->				
+					</tr>		
+				</tbody>
+			</table>			
+		</md-table-container>
+	</md-card-content>
+</md-card>
+
+

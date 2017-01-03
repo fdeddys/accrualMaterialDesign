@@ -1,0 +1,81 @@
+
+<md-dialog arial-label="Detil">
+	<form ng-cloak>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Bagian</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click='tutupDetil()'>
+		        <md-icon md-svg-src="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg" aria-label="Close dialog" ></md-icon>
+		    </md-button>
+		</div>
+	</md-toolbar>
+
+	<md-dialog-content   style="width:800px;max-height:810px; ">
+		<div class="md-dialog-content">
+			<div layout="column" >
+				<md-input-container flex="10">
+					<label>ID</label>
+					<input type='text' ng-disabled='true' id="idBagian" ng-model='bagian.id' />              
+				</md-input-container>	
+				<div layout="row">
+					<md-input-container flex="30">
+						<label>Kode </label>
+						<input type='text' ng-model='bagian.kode'  id="kode" md-autofocus/>
+					</md-input-container>
+			        <md-input-container flex="70">
+			        	<label>Nama</label>
+			        	<input type='text' ng-model='bagian.nama'   /> 
+			        </md-input-container>
+		        </div>
+		        <div layout="row">
+					<md-input-container flex="60">
+						<label>Direktorat </label>
+						<!-- <md-autocomplete
+							md-no-cache="true"
+							md-selected-item="selectedItem"
+							md-search-text="searchText"
+							md-items="direktorat in direktorats"
+							md-item-text="direktorat.nama"
+							md-min-length="0"
+							place-holder="isi kode direktorat"							
+							>
+							<md-item-template>
+								<span md-highlight-text="searchText" md-highlight-flags="^i">{{direktorat.nama}}</span>
+							</md-item-template>
+							<md-not-found>
+								Tidak ditemukan
+							</md-not-found>
+						</md-autocomplete> -->
+						<md-select ng-model="bagian.direktorat" ng-model-options="{trackBy: '$value.id'}">
+							<md-option ng-repeat="direktorat in direktorats" ng-value="direktorat">
+								{{direktorat.nama}}
+							</md-option>							
+						</md-select>
+						<!-- {{bagian.direktorat}}						 -->
+					</md-input-container>
+			        <md-input-container flex="30">
+			        	<label>Status</label>
+			        	<md-select ng-model="bagian.status">
+			        		<md-option ng-repeat="status1 in listStatus" ng-value="status1">
+			        			{{status1}}
+			        		</md-option>
+			        	</md-select>
+			        </md-input-container>
+		        </div>
+			</div>		
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions layout="row">
+		<span flex></span>
+  		<md-button class="md-raised md-primary" ng-click='proses()'">   			
+   			<md-icon md-svg-src="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_36px.svg" arial="okay"></md-icon>
+  		</md-button>
+  		<md-button class="md-warn" ng-click='tutupDetil()'>
+    		Close
+  		</md-button>		
+	</md-dialog-action>
+	</form>
+
+</md-dialog>

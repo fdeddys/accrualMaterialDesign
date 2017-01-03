@@ -1,0 +1,272 @@
+<div  ng-cloak>
+    <md-toolbar class="md-menu-toolbar md-warn ">
+        <div layout="row">
+            <md-toolbar-filler layout layout-align="center center">
+                <md-icon md-svg-icon="images/material-design-icons-3.0.1/navigation/svg/production/ic_apps_36px.svg" aria-label="left-menu"></md-icon>
+            </md-toolbar-filler>            
+            <div>    
+                <md-menu-bar>
+                    <md-menu>
+                        <button ng-click="$mdOpenMenu()">
+                            Menu
+                        </button>
+                            <md-menu-content>
+                                <md-menu-item>
+                                    <md-button ng-click="transaksiBaru()">
+                                        New Transaction
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-divider></md-menu-divider>              
+                                <md-menu-item>
+                                    <md-button ng-click="saveVoucher()">
+                                        Save<span class="md-alt-text"> {{ 'M-O' | keyboardShortcut }}</span>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="openDetil()">
+                                        Open Detil
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="printJurnal()">
+                                        Print<span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-divider></md-menu-divider>            
+                                <md-menu-item>
+                                    <md-button ng-click="null">
+                                        List<span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span>
+                                    </md-button>
+                                </md-menu-item>              
+                            </md-menu-content>
+                    </md-menu>
+                </md-menu-bar>
+            </div>
+        </div>
+    </md-toolbar>
+
+<!-- class="page-container" -->
+<!-- class="page"  -->
+<md-content  layout ="row"   >
+    <md-card flex="90" flex-offset="5" class="md-whiteframe-20dp">
+        <md-card-content class="column">
+            <div layout="row">
+                <md-input-container flex="25" >
+                    <label>No Urut</label>
+                    <input ng-model="jurnalHeader.noUrut" disabled/>
+                </md-input-container>
+                <md-input-container flex="25" >
+                    <label>Issue Date </label>
+                    <md-datepicker ng-model="jurnalHeader.issueDate"   ></md-datepicker>
+                </md-input-container>
+                <md-input-container flex="30">
+                    <label>Jenis Voucher</label>
+                    <md-select ng-model="jurnalHeader.jenisVoucher" ng-disabled="kondisiView || headerAda" ng-change="cekJenisVoucher()" >
+                        <md-option ng-repeat="jenisVoucher in jenisVouchers" ng-value="jenisVoucher" >
+                        {{jenisVoucher}}
+                        </md-option>
+                    </md-select>                    
+                </md-input-container>              
+                <md-input-container flex="10" >
+                    <label>ID</label>
+                    <input ng-model="jurnalHeader.id"  disabled/>
+                </md-input-container>              
+                <md-input-container flex="10">
+                    <label>Status</label>
+                    <input ng-model="StatusData" disabled />
+                </md-input-container>                              
+            </div>
+            <div layout="row">
+                <md-input-container flex="25">
+                    <label>No Voucher</label>
+                    <input ng-model="jurnalHeader.noVoucher" disabled/>
+                </md-input-container>
+                <md-input-container flex="25">
+                    <label>Booking Date </label>
+                    <md-datepicker ng-model="jurnalHeader.bookingDate" ></md-datepicker>
+                </md-input-container>
+                <md-input-container flex="50">
+                    <label>Dibayar kepada</label>
+                    <input ng-model="jurnalHeader.diBayar" ng-disabled="disableDibayarKe" />
+                </md-input-container>              
+            </div>
+            
+        <!-- OPEN DETIL -->            
+        <div style="background-color:whitesmoke" layout-padding class="md-whiteframe-10dp" flex=100 ng-hide="SimpanIsiDetil">
+            <md-card  >
+                <md-card-content class="column">
+                    <form>
+                    <div layout="row">
+                        <md-input-container flex="10" ng-disabled="kondisiView" >
+                            <label>DK</label>
+                            <md-select ng-model="dkSelected" id="dkSelected" >
+                                <md-option ng-repeat="dk in dks" ng-value="dk" >
+                                {{dk}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <div flex=45>
+                            <md-autocomplete    
+                                ng-model="jurnalDetil.coaDtl"
+                                md-no-cache="true"
+                                md-selected-item="selectedCoa"
+                                md-search-text="searchText"
+                                md-items="coaHdr in getCoaDtlByKode(searchText)"
+                                md-item-text="coaHdr.namaPerkiraan"                                
+                                md-min-length="0"
+                                md-autoselect="true"
+                                md-floating-label="Kode COA"                                
+                                >
+                                <!-- id="kodeCoa" -->
+                                <!-- ng-blur="myFunct($event)" md-autofocus -->
+                                <md-item-template>
+                                    <span md-highlight-text="searchText" md-highlight-flags="^i">[{{coaHdr.kodePerkiraan}}]-{{coaHdr.namaPerkiraan}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    Tidak ditemukan
+                                </md-not-found>
+                            </md-autocomplete>            
+                        </div>
+
+                        <md-input-container flex=15>
+                            <label>Kode</label>
+                            <input type="text" ng-model="selectedCoa.kodePerkiraan" disabled>
+                        </md-input-container>                
+
+                        <md-input-container flex="30" ng-disabled="kondisiView" >
+                            <label>Bagian</label>
+                            <md-select ng-model="dkSelected" >
+                                <md-option ng-repeat="bagian in bagians" ng-value="bagian">
+                                {{bagian.nama}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+
+                    <div layout="row">
+                        <md-input-container flex="60">
+                            <label>Keterangan</label>
+                            <input ng-model="jurnalDetil.keterangan" ng-disabled="kondisiView" ng-keyup="cekLastDesc($event)"  >
+                            <md-tooltip>
+                            Isi '=' untuk keterangan sama dg sebelumnya
+                            </md-tooltip>
+                        </md-input-container>
+                        <md-input-container flex="35">
+                            <label>Jumlah</label>
+                            <input type="number" ng-model="jurnalDetil.jumlah" ng-keyup="cekLastJumlah($event)" 
+                                ng-keypress="jgnSimpan()">
+                            <md-tooltip>
+                            Isi '0' untuk Jumlah sama dg sebelumnya
+                            </md-tooltip>
+                        </md-input-container>                
+                    </div>
+
+                    <div layout="row">
+                        <md-input-container flex="30">
+                            <label>Bank</label>
+                            <md-select ng-model="jurnalDetil.bank">
+                                <md-option ng-repeat="bank in banks" ng-value="bank" ng-disabled="kondisiView || !enableBank" >
+                                {{bank}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container flex="30">
+                            <label>Rel</label>
+                            <input type="text" ng-model="jurnalDetil.rel" >
+                        </md-input-container>  
+
+                        <div flex="30"  >
+                            <md-autocomplete    
+
+                                md-no-cache="true"
+                                md-selected-item="jurnalDetil.customer"
+                                md-search-text="searchText"
+                                md-items="customer in getCustomer(searchText)"
+                                md-item-text="customer.nama"
+                                md-min-length="0"
+                                md-autoselect="true"
+                                md-floating-label="Customer ">
+                                <md-item-template>
+                                    <span md-highlight-text="searchText" md-highlight-flags="^i">[{{customer.kode}}]-{{customer.nama}}</span>
+                                </md-item-template>
+                                <md-not-found>
+                                    Tidak ditemukan
+                                </md-not-found>
+                            </md-autocomplete>  
+                        </div>
+                    </div>
+                    </form>
+                </md-card-content>
+
+                <md-card-action layout="row" layout-align="Start">
+                    <span flex></span>
+                    <md-button class="md-primary md-raised" ng-click="tambahDetil()" aria-label="okay">
+                        <md-icon md-svg-src="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_36px.svg" ></md-icon></md-button>
+                    <md-button class="md-warn" ng-click="tambahDetilNEW()">Clear</md-button>
+                    <md-button class="md-warn" ng-click="SimpanIsiDetil=!SimpanIsiDetil">Close</md-button>
+                </md-card-action>
+
+            </md-card>
+        </div> <!-- END OPEN DETIL -->
+
+        <!-- TABLE DETIL -->
+            <div class="md-whiteframe-15dp" layout-padding flex=98 flex-offset=1>
+            <md-table-container>
+                <table md-table  >
+                    <thead md-head  >
+                        <tr md-row>
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>D/K</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>Kode</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>Nama</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Bagian</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Keterangan</span></th> 
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>Jumlah</span> </th>
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>kas/bank</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>Rel</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Cust</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Action</span> </th> 
+                        </tr>   
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row  ng-repeat='JurnalDetil in jurnalDetils ' >
+                            <td md-cell>
+                                <div ng-if="JurnalDetil.debet==0" >K</div>
+                                <div ng-if="JurnalDetil.debet!=0">D</div>
+                            </td>            
+                            <td md-cell>{{JurnalDetil.accountDetil.kodePerkiraan}}</td>            
+                            <td md-cell>{{JurnalDetil.accountDetil.namaPerkiraan | uppercase}}</td>
+                            <td md-cell>{{JurnalDetil.bagian.kode | uppercase}}</td> 
+                            <td md-cell>{{JurnalDetil.keterangan | uppercase}}</td> 
+                            <td md-cell>{{JurnalDetil.debet + JurnalDetil.kredit | number }}</td> 
+                            <td md-cell>{{JurnalDetil.bank.kode | uppercase}}</td> 
+                            <td md-cell>{{JurnalDetil.rel | uppercase}}</td> 
+                            <td md-cell>{{JurnalDetil.customer.kode | uppercase}}</td> 
+                            <td md-cell>
+                                <div layout="row">
+                                    <md-button class="md-warn" ng-click='hapusDetil(JurnalDetil.id, JurnalDetil.accountDetil.namaPerkiraan)' ng-disabled="kondisiView">Delete
+                                        <md-tooltip>
+                                            {{JurnalDetil.accountDetil.namaPerkiraan}} - {{JurnalDetil.debet + JurnalDetil.kredit | number }}
+                                        </md-tooltip>
+                                    </md-button>     
+                                    <md-button class="md-warn" ng-click='editDetil(JurnalDetil.id)' ng-disabled="kondisiView">Edit
+                                        <md-tooltip>
+                                            {{JurnalDetil.accountDetil.namaPerkiraan}} - {{JurnalDetil.debet + JurnalDetil.kredit | number }}
+                                        </md-tooltip>
+                                    </md-button>                                    
+                                </div>
+                            </td>           
+                        </tr>       
+                    </tbody>
+                </table>            
+            </md-table-container>
+            <md-table-pagination md-limit="itemsPerPage" md-page="currentPage" md-total="{{totalItems}}" md-on-paginate="getAll" ></md-table-pagination>
+        <!-- TABLE DETIL -->
+            </div>
+        </md-card-content>
+        
+    </md-card>    
+
+</md-content>
+</div>

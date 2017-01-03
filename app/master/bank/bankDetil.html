@@ -1,0 +1,68 @@
+
+<md-dialog arial-label="Detil">
+	<form ng-cloak>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Bank</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click='tutupDetil()'>
+		        <md-icon md-svg-src="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg" aria-label="Close dialog" ></md-icon>
+		    </md-button>
+		</div>
+	</md-toolbar>
+
+	<md-dialog-content   style="width:800px;max-height:810px; ">
+		<div class="md-dialog-content">
+			<div layout="column" >
+				<md-input-container flex="10">
+					<label>ID</label>
+					<input type='text' ng-disabled='true' id="idBank" ng-model='bank.id' />   
+				</md-input-container>	
+				<div layout="row">
+					<md-input-container flex="20">
+						<label>Kode </label>
+						<input type='text' ng-model='bank.kode'  id="kode" md-autofocus/>
+					</md-input-container>
+			        <md-input-container flex="50">
+			        	<label>Nama</label>
+			        	<input type='text' ng-model='bank.nama' /> 
+			        </md-input-container>
+			        <md-input-container flex="30">
+			        	<label>Account</label>
+			        	<input type='text' ng-model='bank.noAccount' /> 
+			        </md-input-container>			        
+		        </div>
+		        <div layout="row">
+					<md-input-container flex="50">
+						<label>Cabang</label>
+			        	<input type='text' ng-model='bank.namaCabangBank' /> 						
+			        </md-input-container>
+			        <md-input-container flex="30">
+						<label>Kota</label>
+			        	<input type='text' ng-model='bank.kota' /> 						
+			        </md-input-container>
+			        <md-input-container flex="20">
+			        	<label>Status</label>
+			        	<md-select ng-model="bank.status">
+			        		<md-option ng-repeat="status1 in listStatus" ng-value="status1">
+			        			{{status1}}
+			        		</md-option>
+			        	</md-select>
+			        </md-input-container>
+		        </div>
+			</div>		
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions layout="row">
+		<span flex></span>
+  		<md-button class="md-raised md-primary" ng-click='proses()'">   			
+   			<md-icon md-svg-src="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_36px.svg" arial="okay"></md-icon>
+  		</md-button>
+  		<md-button class="md-warn" ng-click='tutupDetil()'>
+    		Close
+  		</md-button>		
+	</md-dialog-action>
+	</form>
+
+</md-dialog>

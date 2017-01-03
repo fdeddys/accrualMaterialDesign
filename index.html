@@ -1,0 +1,215 @@
+<html lang="en" >
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		  <!-- Angular Material style sheet -->
+		<link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
+		<link rel="stylesheet" type="text/css" href="node_modules/angular-material-data-table/dist/md-data-table.min.css"">
+		<link rel="stylesheet" href="app/css/myStyle.css">
+		<link rel="shortcut icon" href="favicon.ico"/>
+		<title>Accrual Basic ver :01</title>	
+		<base href="#/">	
+	</head>
+
+	<body ng-app="appAccrual" ng-controller ="indexController">
+		<!--
+		Your HTML content here
+		-->  
+	<div ng-hide="!isLoginAuth">
+	<!--  -->
+		<md-content ng-cloak>	
+
+			<md-toolbar class="md-hue2">
+				<div class="md-toolbar-tools">
+					<md-button class ="md-fab md-mini md-icon-button" arial-label="isiMenu" ng-click="openSideMenu()">
+						<md-tooltip>
+				            Menu Utama
+				        </md-tooltip>
+						<md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_view_list_48px.svg" aria-label="left-menu"></md-icon>
+					</md-button>
+					<!-- <h2 ng-click="mainMenu()"> Accrual Basis </h2>			 -->
+					<a href="#/"><h2>Accrual Basis</h2> </a>
+					<span flex></span>
+					<md-button class="md-fab md-mini md-icon-button" aria-label="favoritee" ng-click="showBottomSheet()">
+						<md-tooltip>
+				            Shortcut
+				        </md-tooltip>
+						<md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_grade_24px.svg" ></md-icon>
+					</md-button> 
+					<md-button class="md-accent md-raised md-hue-1" arial-label="lari" ng-click="logout()" >
+						<md-tooltip>
+				            Keluar dari applikasi
+				        </md-tooltip>
+						<md-icon md-svg-icon="images/material-design-icons-3.0.1/maps/svg/production/ic_directions_run_24px.svg" ></md-icon>
+						<label class="md-primary">logout</label>
+					</md-button>			
+
+				</div>		
+			</md-toolbar>
+			
+		</md-content>
+		
+	</div>
+
+	<ng-view></ng-view>		  		
+
+	<md-sidenav class="md-sidenav-left md-whiteframe-4dp " md-component-id="menu-left"  >
+		<md-content>
+			<md-list ng-cloak>
+				<md-subheader class="md-no-sticky" class="md-hue-3" >Master</md-subheader>
+				<md-list-item  ng-click="menuDirektorat()">					
+					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_assignment_48px.svg"  class="md-warn md-hue-1"></md-icon> Direktorat</p>
+				</md-list-item>
+				<md-list-item  ng-click="menuBagian()">
+					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_assignment_48px.svg"  class="md-warn md-hue-2"></md-icon> Bagian</p>	
+				</md-list-item>
+				<md-list-item  ng-click="menuCustomer()">
+					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_face_48px.svg"  class="md-warn md-hue-3"></md-icon> Customer</p>										
+				</md-list-item>
+				<md-list-item  ng-click="menuBank()">
+					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_euro_symbol_48px.svg" style="color:rgb(0, 255, 0)"  class="md-warn md-hue-1" ></md-icon>Bank</p>										
+				</md-list-item>
+				<md-list-item  ng-click="menuCoaHdr()">
+					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_assignment_48px.svg"  class="md-warn md-hue-5" ></md-icon> COA Header</p>			
+				</md-list-item>
+				<md-list-item  ng-click="menuCoaDtl()">
+					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_assignment_48px.svg" style="color:rgb(0, 0, 255)"  class="md-warn md-hue-5"></md-icon> COA Detil</p>				
+				</md-list-item>
+
+				<md-divider></md-divider>
+
+				<md-subheader class="md-no-sticky" class="md-hue-3" >Transaksi</md-subheader>
+				<md-list-item  ng-click="menuJurnal()">					
+					<p>Jurnal</p>								
+				</md-list-item>
+				<md-list-item  ng-click="null">
+					Post. Penerimaan/Pemindahan
+				</md-list-item>
+				<md-list-item  ng-click="null">
+					<p>Post. Pengeluaran</p>										
+				</md-list-item>
+				<md-list-item  ng-click="null">
+					<p>Batal Posting</p>										
+				</md-list-item>
+				<md-list-item  ng-click="null">
+					<p>Delete Jurnal</p>										
+				</md-list-item>
+				<md-list-item  ng-click="null">
+					<p>Buku Besar Trial</p>										
+				</md-list-item>
+
+				<md-divider></md-divider>
+
+				<md-subheader class="md-no-sticky"  >Keuangan</md-subheader>
+				<md-list-item  ng-click="null">					
+					<p>Surat Transfer</p>								
+				</md-list-item>
+				<md-list-item  ng-click="null">
+					<p>Booking Date</p>
+				</md-list-item>
+
+				<md-divider></md-divider>
+
+				<md-subheader class="md-no-sticky"  >Admin</md-subheader>
+				<md-list-item  ng-click="null">					
+					<p>Tutup Bulan</p>								
+				</md-list-item>
+				<md-list-item  ng-click="null">
+					<p>Buka Bulan</p>
+				</md-list-item>
+				<md-list-item  ng-click="null">					
+					<p>Neraca</p>								
+				</md-list-item>
+				<md-list-item  ng-click="null">
+					<p>Buku Besar</p>
+				</md-list-item>
+
+				<md-subheader class="md-no-sticky"  >Utility</md-subheader>
+				<md-list-item  ng-click="null">					
+					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_perm_identity_48px.svg" ></md-icon> User</p>								
+				</md-list-item>
+				<md-list-item  ng-click="null">
+					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_build_48px.svg" ></md-icon> Config</p>
+				</md-list-item>
+				<md-list-item  ng-click="null">					
+					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/maps/svg/production/ic_directions_run_24px.svg" ></md-icon> Logout </p>								
+				</md-list-item>			
+
+			</md-list>
+		</md-content>
+
+	</md-sidenav>
+
+		<!-- Angular Material requires Angular.js Libraries -->
+		<script src="node_modules/angular/angular.min.js"></script>
+		<script src="node_modules/angular-route/angular-route.js" type="text/javascript" ></script>
+		<script src="node_modules/angular-growl-v2/build/angular-growl.js" type="text/javascript" ></script>	
+		<script src="node_modules/angular-cookies/angular-cookies.js" type="text/javascript" ></script>
+		<script src="node_modules/angular-animate/angular-animate.min.js"></script>
+		<script src="node_modules/angular-aria/angular-aria.min.js"></script>
+		<script src="node_modules/angular-messages/angular-messages.min.js"></script>
+
+		<!-- Angular Material Library -->
+		<script src="node_modules/angular-material/angular-material.min.js"></script>
+		<script src="node_modules/angular-material-data-table/dist/md-data-table.min.js" ></script>
+
+		<!-- Your application bootstrap  -->
+		<script type="text/javascript" src="app/utama/utama.js"></script>
+		<script type="text/javascript" src="indexController.js"></script>
+		<script type="text/javascript" src="app/utama/bottomSheetController.js"></script>
+		<script type="text/javascript" src="app/login/loginController.js"></script>
+		<script type="text/javascript" src="app/login/AuthenticationService.js"></script>
+
+		<!-- MASTER -->
+		<!-- 	Direktorat -->
+		<script type="text/javascript" src="app/master/direktorat/direktoratService.js"></script>
+		<script type="text/javascript" src="app/master/direktorat/direktoratController.js"></script>
+		<script type="text/javascript" src="app/master/direktorat/direktoratDetilController.js"></script>
+
+		<!-- 	CUSTOMER -->
+		<script type="text/javascript" src="app/master/customer/customerService.js"></script>
+		<script type="text/javascript" src="app/master/customer/customerController.js"></script>
+		<script type="text/javascript" src="app/master/customer/customerDetilController.js"></script>
+
+		<!-- 	Bagian -->
+		<script type="text/javascript" src="app/master/bagian/bagianService.js"></script>
+		<script type="text/javascript" src="app/master/bagian/bagianController.js"></script>
+		<script type="text/javascript" src="app/master/bagian/bagianDetilController.js"></script>
+
+		<!-- 	BANK -->
+		<script type="text/javascript" src="app/master/bank/bankService.js"></script>
+		<script type="text/javascript" src="app/master/bank/bankController.js"></script>
+		<script type="text/javascript" src="app/master/bank/bankDetilController.js"></script>
+
+		<!-- 	COA -->
+		<script type="text/javascript" src="app/master/coa/coaService.js"></script>
+		<script type="text/javascript" src="app/master/coa/coaHeaderController.js"></script>
+		<script type="text/javascript" src="app/master/coa/coaHeader-detilController.js"></script>
+
+		<!-- 	COA DETIL -->
+		<script type="text/javascript" src="app/master/coa/coa-detil/coaDetilController.js"></script>
+		<script type="text/javascript" src="app/master/coa/coa-detil/coaDetil-detilController.js"></script>
+
+		<!-- TRANSAKSI -->
+		<!-- 	JURNAL -->
+		<script type="text/javascript" src="app/transaksi/jurnal/jurnalService.js"></script>
+		<script type="text/javascript" src="app/transaksi/jurnal/jurnalController.js"></script>
+
+		<!-- 	JURNAL DETIL-->
+		<script type="text/javascript" src="app/transaksi/jurnal/detil/jurnalDetilService.js"></script>
+		<script type="text/javascript" src="app/transaksi/jurnal/detil/jurnalDetilController.js"></script>
+
+		<!-- Utility -->
+		<!-- 	- User -->
+		<script type="text/javascript" src="app/utility/user/userFactory.js"></script>
+		<script type="text/javascript" src="app/utility/accrualConfig/accrualConfigService.js"></script>
+		<script type="text/javascript" src="app/utility/statusVoucher/statusVoucherService.js"></script>
+
+		<!-- <script type="text/javascript">    
+		/**
+		 * You must include the dependency on 'ngMaterial' 
+		 */
+		angular.module('appAccrual', ['ngMaterial']);
+		</script> -->
+	  
+	</body>
+</html>

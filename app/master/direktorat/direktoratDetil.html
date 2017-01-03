@@ -1,0 +1,46 @@
+
+<md-dialog arial-label="Detil">
+	<form ng-cloak>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>Direktorat</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click='tutupDetil()'>
+		        <md-icon md-svg-src="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg" aria-label="Close dialog" ></md-icon>
+		    </md-button>
+		</div>
+	</md-toolbar>
+
+	<md-dialog-content layout-padding>
+		<div class="md-dialog-content">
+			<div layout="column" >
+				<md-input-container flex="10">
+					<label>ID</label>
+					<input type='text' ng-disabled='true' id="idDirektorat" ng-model='direktorat.id' />              
+				</md-input-container>	
+				<div layout="row">
+					<md-input-container flex="30">
+						<label>Kode </label>
+						<input type='text' ng-model='direktorat.kode'  id="kode" md-autofocus/>
+					</md-input-container>
+			        <md-input-container flex="70">
+			        	<label>Nama</label>
+			        	<input type='text' ng-model='direktorat.nama'   /> 
+			        </md-input-container>
+		        </div>
+			</div>		
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions layout="row">
+		<span flex></span>
+  		<md-button class="md-raised md-primary" ng-click='proses()'">   			
+   			<md-icon md-svg-src="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_36px.svg" arial="okay"></md-icon>
+  		</md-button>
+  		<md-button class="md-warn" ng-click='tutupDetil()'>
+    		Close
+  		</md-button>		
+	</md-dialog-action>
+	</form>
+
+</md-dialog>

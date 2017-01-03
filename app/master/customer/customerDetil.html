@@ -1,0 +1,98 @@
+<div layout="column" ng-cloak >
+
+	<md-content layout-padding layout ="row" >
+		<md-card flex="80" flex-offset="10" >
+			<md-card-title>
+				<md-card-title-text>
+					<span class="md-headline">Detil Customer</span>
+				</md-card-title-text>
+			</md-card-title>
+
+			<md-card-content class="column">
+
+				<div layout="row">
+					<md-input-container flex="15">
+			            <label>ID</label>
+			            <input ng-model="customer.id" disabled/>
+			        </md-input-container>
+					<md-input-container flex="20">
+			            <label>Kode </label>
+			            <input ng-model="customer.kode" md-autofocus />
+			        </md-input-container>
+			        <md-input-container flex="65">
+			            <label>Nama</label>
+			            <input ng-model="customer.nama" />
+			        </md-input-container>
+			         
+				</div>
+
+				<div layout="row">
+					<md-input-container flex="40">
+			            <label>Alamat</label>
+			            <input ng-model="customer.alamat" >
+			        </md-input-container>
+			        <md-input-container flex="20">
+			            <label>Kota</label>
+			            <input ng-model="customer.kota" >
+			        </md-input-container>
+			        <md-input-container flex="20">
+			            <label>Telp</label>
+			            <input ng-model="customer.telp" >
+			        </md-input-container>
+			        <md-input-container flex="20">
+			            <label>Fax</label>
+			            <input ng-model="customer.fax" >
+			        </md-input-container>
+				</div>
+
+				<div layout="row">
+					<md-input-container flex="25">
+			            <label>Nama Bank</label>
+			            <input ng-model="customer.namaBank" >
+			        </md-input-container>
+			        <md-input-container flex="25">
+			            <label>No. Rek</label>
+			            <input ng-model="customer.noRekening" >
+			        </md-input-container>
+			        <md-input-container flex="25">
+			            <label>Cabang</label>
+			            <input ng-model="customer.namaCabangBank" >
+			        </md-input-container>
+			        <md-input-container flex="25">
+			            <label>Kota</label>
+			            <input ng-model="customer.kotaBank" >
+			        </md-input-container>
+			        
+				</div>
+
+				<div layout="row">
+					<md-input-container flex="20">
+			        	<label>Status</label>
+			        	<md-select ng-model="customer.status">
+			        		<md-option ng-repeat="status1 in listStatus" ng-value="status1">
+			        			{{status1}}
+			        		</md-option>
+			        	</md-select>
+			        </md-input-container>
+			        <md-input-container flex="30">
+			            <label>NPWP</label>
+			            <input ng-model="customer.npwp" >
+			        </md-input-container>
+					<md-input-container flex="50">
+			            <label>Kontak</label>
+			            <input ng-model="customer.kontakPerson" >
+			        </md-input-container>			        
+				</div>
+
+			</md-card-content>
+
+			<md-card-action layout="row" layout-align="Start">
+				<span flex></span>
+				<md-button class="md-primary md-raised" ng-click="proses()"aria-label="okay">
+					<md-icon md-svg-src="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_36px.svg" ></md-icon>
+				</md-button>
+				<md-button class="md-warn" ng-click="tutup()">Close</md-button>
+			</md-card-action>
+		</md-card>
+	</md-content>
+</div>

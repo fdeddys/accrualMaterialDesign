@@ -1,0 +1,90 @@
+.red {
+	background-color : red;
+}
+
+.lightBlue {
+	background-color : lightBlue;	
+}
+
+.lightGreen {
+	background-color : lightGreen;
+}
+
+/*tr:hover {background-color: #f5f5f5}*/
+tr:hover {
+  background-color: MistyRose;  
+  /*color: white;*/
+}
+/*
+tr:hover td {color:red;}*/
+
+
+th {
+    background-color: whitesmoke;
+    color: red;
+}
+
+.btnRound {
+  /*color : rgb(49, 46, 46);*/
+  /*background-color: rgba(255, 222, 121, 0.96);*/
+  border-radius: 5px 5px 5px 5px;
+  font-size: 13px;
+}
+
+
+
+.bottomSheetdemoBasicUsage .md-inline-list-icon-label {
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: -10px;
+  height: 24px;
+  vertical-align: middle; }
+
+.bottomSheetdemoBasicUsage .md-grid-item-content {
+  height: 90px;
+  padding-top: 10px; }
+
+.bottomSheetdemoBasicUsage .md-grid-item-content md-icon {
+  height: 48px;
+  width: 48px; }
+
+.bottomSheetdemoBasicUsage .md-grid-text {
+  padding-bottom: 5px; }
+
+.bottomSheetdemoBasicUsage md-list-item, .bottomSheetdemoBasicUsage md-list-item .md-list-item-inner {
+  min-height: 48px; }
+
+.bottomSheetdemoBasicUsage h2 {
+  line-height: 36px;
+  padding-top: 10px; }
+
+.bottomSheetdemoBasicUsage .md-subheader .md-subheader-inner {
+  padding: 0; }
+
+.bottomSheetdemoBasicUsage md-toast .md-toast-content {
+  background-color: #B14141; }
+
+.bottomSheetdemoBasicUsage md-toast > * {
+  font-weight: bolder; }
+
+
+/*Ukuran input container size*/
+md-input-container label{
+    font-size: 12px;
+}
+
+md-select{
+    font-size: 12px; 
+}
+
+
+/*remove calendar icon*/
+
+/*.md-datepicker-button {
+    display: none !important;   
+}
+
+.md-datepicker-input-container {
+    margin-left: 0 !important;    
+}*/
