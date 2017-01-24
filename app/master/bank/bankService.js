@@ -11,6 +11,16 @@ appServices.factory('bankFactory', ['$http','$rootScope', function($http,$rootSc
 		});		
 	};
 
+	bankFactory.getAllNonKasBank=function(hal,jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi+'/nonKas/hal/'+hal+'/jumlah/'+jumlah,
+			headers:{'Content-Type':'application/json'}	
+		});		
+	};
+
+	
+
 	bankFactory.isKodeExis=function(kode){
 		return $http({
 			method:'GET',

@@ -146,7 +146,7 @@ myApp.config(['$routeProvider','$locationProvider','growlProvider',
 		// 	controller: 'jurnalController'
 		// }).							
 		when('/masterUser',{
-			templateUrl:'partials/Utility/masterUser.html',
+			templateUrl:'app/utility/user/user.html',
 			controller: 'userController'
 		}).	
 		when('/jurnal',{
@@ -170,19 +170,19 @@ myApp.config(['$routeProvider','$locationProvider','growlProvider',
 			controller: 'jurnalBalikController'
 		}).	
 		when('/suratTransfer',{
-			templateUrl:'partials/keuangan/suratTransfer.html',
+			templateUrl:'app/keuangan/suratTransfer/suratTransfer.html',
 			controller: 'suratTransferController'
 		}).
-		when('/suratTransferDetil/:idHd',{
-			templateUrl:'partials/keuangan/suratTransferDetil.html',
+		when('/suratTransfer/:id',{
+			templateUrl:'app/keuangan/suratTransfer/detil/suratTransferDetil.html',
 			controller: 'suratTransferDetilController'
 		}).			
 		when('/inputBooking',{
 			templateUrl:'partials/transaksi/isiBooking.html',
 			controller: 'isiBookingController'
 		}).	
-		when('/config',{
-			templateUrl:'partials/Utility/accrualConfig.html',
+		when('/accrualConfig',{
+			templateUrl:'app/utility/accrualConfig/accrualConfig.html',
 			controller: 'accrualConfigController'
 		}).	
 		when('/bukuBesar',{
@@ -194,7 +194,7 @@ myApp.config(['$routeProvider','$locationProvider','growlProvider',
 			controller: 'tutupBulanController'
 		}).				
 		when('/posting/:isJurnalPengeluaran',{
-			templateUrl:'partials/laporan/posting.html',
+			templateUrl:'app/transaksi/posting/posting.html',
 			controller: 'postingController'
 		}).	
 		when('/bbTrial',{

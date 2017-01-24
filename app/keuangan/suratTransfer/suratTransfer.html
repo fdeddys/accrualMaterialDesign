@@ -1,0 +1,88 @@
+<md-card>
+	<md-card-content>
+		<md-toolbar class="md-table-toolbar md-default" ng-show="!showCari" >
+			<div class="md-toolbar-tools">
+				<h4 class="md-headline">Surat Transfer</h4> 
+				<span flex></span>				
+				<md-button class="md-fab md-mini md-primary md-hue-2" aria-label="loadIsi" ng-click="loadIsi()">
+					<md-tooltip>
+		            	Cari data
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_swap_horiz_24px.svg"></md-icon>
+				</md-button>			
+				<md-button class="md-fab md-mini md-primary md-hue-2 " aria-label="tambah" ng-click="edit('new')">
+					<md-tooltip>
+		            	Tambah
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/av/svg/production/ic_playlist_add_48px.svg"></md-icon>
+				</md-button>
+				
+			</div>
+		</md-toolbar>
+
+		<md-toolbar class="md-table-toolbar md-default" ng-show="showCari">
+			<br>
+			<div class="md-toolbar-tools">
+				<div layout="row">
+					<!-- <div class="column"> -->
+						<md-input-container flex=20>
+							<label >No Approve</label>
+							<input type='text' ng-model='searchNoApprove'  >
+						</md-input-container>										
+
+						<md-input-container >	
+							<label>Tanggal Awal </label>							
+							<md-datepicker ng-model="tgl1" ></md-datepicker>		
+						</md-input-container>
+						
+						<md-input-container   >
+							<label>Tanggal Akhir </label>
+							<md-datepicker ng-model="tgl2" ></md-datepicker>
+						</md-input-container>							
+
+						<p  flex>
+							<md-button class="md-fab md-mini md-warn md-hue-2 " aria-label="tutup" ng-click="getAll()">					
+								<md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_youtube_searched_for_48px.svg"></md-icon>
+							</md-button>
+							<md-button class="md-fab md-mini md-primary md-hue-2 " aria-label="tutup" ng-click="loadIsi()">													
+								<md-icon md-svg-icon="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg"></md-icon>
+							</md-button>
+						</p>											
+				</div>				
+			</div>
+		</md-toolbar>
+
+		<md-table-container>
+			<table md-table  >
+				<thead md-head  >
+					<tr md-row>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>ID</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Tanggal</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>No Approve</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Bank</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>No Check</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Total</span> </th> 	
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Action</span> </th> 
+					</tr>	
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat='suratTransfer in suratTransfers ' >
+						<td md-cell>{{suratTransfer.id}}</td>
+						<td md-cell>{{suratTransfer.tglSurat | date:'dd-MMM-yyyy'}}</td>
+						<td md-cell>{{suratTransfer.noApprove| uppercase}}</td>			
+						<td md-cell>{{suratTransfer.bank.nama | uppercase}}</td>			
+						<td md-cell>{{suratTransfer.noCek | uppercase}}</td> 
+						<td md-cell style="text-align:right">{{suratTransfer.total| currency:'Rp':0 }}</td> 	
+						<td md-cell>
+							<md-button class="md-warn" ng-click='edit(suratTransfer.id)' >EDIT</md-button>
+							<md-button class="md-warn" ng-click='delete(suratTransfer.id)' >Delete</md-button>
+						</td> 						
+					</tr>		
+				</tbody>
+			</table>			
+		</md-table-container>
+		<md-table-pagination md-limit="itemsPerPage" md-page="currentPage" md-total="{{totalItems}}" md-on-paginate="getAll" ></md-table-pagination>
+	</md-card-content>
+</md-card>
+
+

@@ -21,7 +21,7 @@
 					</md-input-container>	
 					<md-input-container flex="30">
 						<label>Kode </label>
-						<input type='text' ng-model='coaDtl.kodePerkiraan'  id="kode" md-autofocus/>
+						<input type='text' ng-model='coaDtl.kodePerkiraan'  id="kode" md-autofocus ng-disabled="jenisTransaksi==2" maxlength="6" />
 					</md-input-container>
 			        <md-input-container flex="60">
 			        	<label>Nama</label>

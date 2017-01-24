@@ -53,6 +53,33 @@ appControllers.controller('indexController',
         $location.path('/jurnal'); 
     }        
 
+    $scope.postingPenerimaan = function() {
+        tutupSideMenu();
+        $location.path('/posting/false');         
+    }
+
+    $scope.postingPengeluaran = function() {
+        tutupSideMenu();
+        $location.path('/posting/true');         
+    }
+
+    $scope.suratTransfer = function() {
+        tutupSideMenu();
+        $location.path('/suratTransfer');         
+    }
+
+    $scope.masterUser = function(){
+        tutupSideMenu();
+        $location.path('/masterUser');                 
+    }
+
+    $scope.accrualConfig = function(){
+        tutupSideMenu();
+        $location.path('/accrualConfig');                 
+    }
+
+    
+
     function tutupSideMenu(){
 		$mdSidenav('menu-left')
         	.close()

@@ -1,0 +1,69 @@
+
+<md-dialog arial-label="Detil">
+	<form ng-cloak>
+	<md-toolbar>
+		<div class="md-toolbar-tools">
+			<h2>User</h2>
+			<span flex></span>
+			<md-button class="md-icon-button" ng-click='cancelBtn()'>
+		        <md-icon md-svg-src="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg" aria-label="Close dialog" ></md-icon>
+		    </md-button>
+		</div>
+	</md-toolbar>
+
+	<md-dialog-content   style="width:800px;max-height:810px; ">
+		<div class="md-dialog-content">
+			<div layout="column" >
+				<div layout="row">
+					<md-input-container flex="10" >
+						<label>ID</label>
+						<input type='text' ng-disabled='true' id="idUser" ng-model='user.id' /> 
+					</md-input-container>	
+				
+					<md-input-container flex="50">
+						<label>Nama </label>
+						<input type='text' ng-model='user.nama'  id="nama" md-autofocus />
+					
+					</md-input-container>
+			        <md-input-container flex="15">
+			        	<label>Initial</label>
+			        	<input type='text' ng-model='user.initial'   /> 
+			        </md-input-container>
+
+			        <md-input-container flex="20">
+			        	<label>Status</label>
+			        	<md-select ng-model="user.status">
+			        		<md-option ng-repeat="status1 in statusUsers" ng-value="status1">
+			        			{{status1}}
+			        		</md-option>
+			        	</md-select>
+			        </md-input-container>
+		        </div>
+		        <div layout="row">
+
+					<md-input-container flex="30">
+						<label>Password</label>
+			        	<input type='password' ng-model='password'   /> 						
+					</md-input-container>
+
+					<md-input-container flex>
+						<label></label>
+			        	<label style="color:red">Kosongkan password jika tidak ingin di ganti!</label>
+					</md-input-container>
+		        </div>
+			</div>		
+		</div>
+	</md-dialog-content>
+
+	<md-dialog-actions layout="row">
+		<span flex></span>
+  		<md-button class="md-raised md-primary" ng-click='proses()'">   			
+   			<md-icon md-svg-src="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_36px.svg" aria-label="okay"></md-icon>
+  		</md-button>
+  		<md-button class="md-warn" ng-click='cancelBtn()'>
+    		Close
+  		</md-button>		
+	</md-dialog-action>
+	</form>
+
+</md-dialog>

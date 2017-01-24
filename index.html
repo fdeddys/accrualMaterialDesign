@@ -81,10 +81,10 @@
 				<md-list-item  ng-click="menuJurnal()">					
 					<p>Jurnal</p>								
 				</md-list-item>
-				<md-list-item  ng-click="null">
+				<md-list-item  ng-click="postingPenerimaan()">
 					Post. Penerimaan/Pemindahan
 				</md-list-item>
-				<md-list-item  ng-click="null">
+				<md-list-item  ng-click="postingPengeluaran()">
 					<p>Post. Pengeluaran</p>										
 				</md-list-item>
 				<md-list-item  ng-click="null">
@@ -99,8 +99,8 @@
 
 				<md-divider></md-divider>
 
-				<md-subheader class="md-no-sticky"  >Keuangan</md-subheader>
-				<md-list-item  ng-click="null">					
+				<md-subheader class="md-no-sticky" ng-hide='false' >Keuangan</md-subheader>
+				<md-list-item  ng-click="suratTransfer()">					
 					<p>Surat Transfer</p>								
 				</md-list-item>
 				<md-list-item  ng-click="null">
@@ -124,10 +124,10 @@
 				</md-list-item>
 
 				<md-subheader class="md-no-sticky"  >Utility</md-subheader>
-				<md-list-item  ng-click="null">					
+				<md-list-item  ng-click="masterUser()">					
 					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_perm_identity_48px.svg" ></md-icon> User</p>								
 				</md-list-item>
-				<md-list-item  ng-click="null">
+				<md-list-item  ng-click="accrualConfig()">
 					<p><md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_build_48px.svg" ></md-icon> Config</p>
 				</md-list-item>
 				<md-list-item  ng-click="null">					
@@ -198,12 +198,31 @@
 		<script type="text/javascript" src="app/transaksi/jurnal/detil/jurnalDetilService.js"></script>
 		<script type="text/javascript" src="app/transaksi/jurnal/detil/jurnalDetilController.js"></script>
 
+		<!-- KEUANGAN -->
+		<!-- 	SURAT TRANSFER-->
+		<script type="text/javascript" src="app/keuangan/suratTransfer/suratTransferService.js"></script>
+		<script type="text/javascript" src="app/keuangan/suratTransfer/suratTransferController.js"></script>
+		<script type="text/javascript" src="app/keuangan/suratTransfer/detil/suratTransferDetilController.js"></script>		
+		<script type="text/javascript" src="app/keuangan/suratTransfer/detil/tarikData/tarikDataController.js"></script>		
+		
+		<!-- 	POSTING-->
+		<script type="text/javascript" src="app/transaksi/posting/postingController.js"></script>
+
 		<!-- Utility -->
 		<!-- 	- User -->
 		<script type="text/javascript" src="app/utility/user/userFactory.js"></script>
+		<script type="text/javascript" src="app/utility/user/userController.js"></script>
+		<script type="text/javascript" src="app/utility/user/userDetilController.js"></script>
+
+		<!-- 	- ACCRUAL CONFIG -->
 		<script type="text/javascript" src="app/utility/accrualConfig/accrualConfigService.js"></script>
+		<!-- 	- ACCRUAL CONFIG -->
+		<script type="text/javascript" src="app/utility/accrualConfig/accrualConfigController.js"></script>
+
 		<script type="text/javascript" src="app/utility/statusVoucher/statusVoucherService.js"></script>
 
+		<!-- BUKU BESAR -->
+		<script type="text/javascript" src="app/bukuBesar/bukuBesarService.js"></script>
 		<!-- <script type="text/javascript">    
 		/**
 		 * You must include the dependency on 'ngMaterial' 

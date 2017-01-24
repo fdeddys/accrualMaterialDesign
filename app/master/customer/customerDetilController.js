@@ -24,13 +24,14 @@ appControllers.controller('customerDetilController',
 			status:""
 		};
 
+		
 		var id = $routeParams.id;
 
 		if(id==0){
 			$scope.jenisTransaksi=1;			
 			$scope.customer.id='[Automatic]';	
 			$scope.customer.status=$scope.listStatus[0];
-
+			focus('kodeCust');
 		}else{
 			$scope.jenisTransaksi=2;	
 			customerFactory

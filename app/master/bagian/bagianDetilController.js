@@ -34,7 +34,7 @@ appControllers.controller('bagianDetilController',
 					$scope.jenisTransaksi=1;			
 					$scope.bagian.id='[Automatic]';	
 					$scope.bagian.direktorat = $scope.direktorats[0];
-					$scope.bagian.status = $scope.listStatus[0];
+					$scope.bagian.status = $scope.listStatus[0];					
 				}else{
 					$scope.jenisTransaksi=2;	
 					bagianFactory

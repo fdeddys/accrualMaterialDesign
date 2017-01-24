@@ -64,7 +64,15 @@ appServices.factory('jurnalDetilFactory', ['$http','$rootScope', function($http,
 			method:'GET',
 			url:urlApi + '/listVoucST/hal/'+hal+'/jumlah/'+jumlah
 		})
-	}	
+	}
+
+	jurnalDetilFactory.listVoucSTByBank=function(idBank,noUrut, hal, jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi + '/listVoucST/bank/'+idBank+'/noUrut/'+noUrut+'/hal/'+hal+'/jumlah/'+jumlah
+		})
+	}
+
 	return jurnalDetilFactory;
 
 }])

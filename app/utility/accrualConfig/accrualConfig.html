@@ -1,0 +1,76 @@
+<!-- <h4 style='color:green; background-color:lightgreen' >Input / Edit Data Direktorat</h4> -->
+<md-card>
+	<md-card-content>		
+		<md-toolbar>
+			<div class="md-toolbar-tools">
+				<h2>Configuration</h2>
+				<span flex></span>				
+			</div>
+		</md-toolbar>
+
+		<div class="md-dialog-content">
+			<div layout="column" >
+				<div layout="row">
+					<md-input-container flex="30" >
+						<label>Voucher Penerimaan</label>
+						<input type='text'  id="headerPenerimaan" ng-model='accrualConfig.headerPenerimaan' md-autofocus /> 
+					</md-input-container>	
+				
+					<md-input-container flex="30">
+						<label>Voucher Pembayaran</label>
+						<input type='text' ng-model='accrualConfig.headerPembayaran'  id="headerPembayaran" />
+					
+					</md-input-container>
+			        <md-input-container flex="30">
+			        	<label>Voucher Pemindahan</label>
+			        	<input type='text' ng-model='accrualConfig.headerPemindahan'   /> 
+			        </md-input-container>
+
+		        </div>
+		        <div layout="row">
+
+					<md-input-container flex="20" >
+						<label>COA Bank</label>
+						<input type='text' ng-model='accrualConfig.coaBank' /> 
+						<md-button class="md-warn md-raised" ng-click="check(accrualConfig.coaBank)">cek COA [{{accrualConfig.coaBank}}]
+			        	</md-button>			        				        	
+					</md-input-container>	
+				
+					<md-input-container flex="20">
+						<label>Coa kas</label>
+						<input type='text' ng-model='accrualConfig.coaKas'  />					
+						<md-button class="md-warn md-raised" ng-click="check(accrualConfig.coaKas)">cek COA [{{accrualConfig.coaKas}}]
+			        	</md-button>			        				        	
+					</md-input-container>
+
+			        <md-input-container flex="20">
+			        	<label>Coa Jurnal Balik</label>			        	
+			        	<input type='text' ng-model='accrualConfig.coaJurnalBalik'   /> 
+			        	<md-button class="md-warn md-raised" ng-click="check(accrualConfig.coaJurnalBalik)">cek COA [{{accrualConfig.coaJurnalBalik}}]
+			        	</md-button>			        				        	
+			        </md-input-container>
+
+			         <md-input-container flex="20">
+			        	<label>Coa Piutang Usaha</label>			        	
+			        	<input type='text' ng-model='accrualConfig.coaPiutangUsaha'   /> 
+			        	<md-button class="md-warn md-raised" ng-click="check(accrualConfig.coaPiutangUsaha)">cek COA [{{accrualConfig.coaPiutangUsaha}}]
+			        	</md-button>			        				        	
+			        </md-input-container>
+
+			        <md-input-container flex="20">
+			        	<label>Kode kas pada table Bank</label>			        	
+			        	<input type='text' ng-model='accrualConfig.kodeKasTableBank'   /> 
+			        </md-input-container>
+
+		        </div>
+			</div>		
+		</div>		
+	</md-card-content>
+	<md-card-actions layout="row" layout-align="end center">
+		<span flex></span>
+		<md-button class="md-primary md-raised" ng-click="proses()">Simpan Configuration</md-button	>
+	</md-card-actions>
+
+</md-card>
+
+

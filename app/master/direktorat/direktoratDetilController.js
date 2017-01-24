@@ -1,7 +1,7 @@
 appControllers.controller('direktoratDetilController', 
 	['$scope','id','direktoratFactory', '$mdDialog','$mdToast',
 	function($scope, id, direktoratFactory, $mdDialog,$mdToast){
-	
+		
 	//alert(id);
 	function startModule(){
 
@@ -15,7 +15,8 @@ appControllers.controller('direktoratDetilController',
 			$scope.jenisTransaksi=1;			
 			$scope.direktorat.id='[Automatic]';				
 			$scope.direktorat.nama='';
-			$scope.direktorat.kode='';			
+			$scope.direktorat.kode='';	
+			$scope.isEdit=false;		
 		}else{
 			$scope.jenisTransaksi=2;						
 			direktoratFactory

@@ -1,6 +1,8 @@
 appControllers.controller('jurnalController', 
-	['$scope','jurnalHeaderFactory', '$window','$rootScope', '$filter','statusVoucherFactory','$location',
-	function($scope,jurnalHeaderFactory, $window, $rootScope,$filter, statusVoucherFactory, $location ){
+	['$scope','jurnalHeaderFactory', '$window','$rootScope', '$filter','statusVoucherFactory',
+	'$location','$mdDialog','$mdToast',
+	function($scope,jurnalHeaderFactory, $window, $rootScope,$filter, statusVoucherFactory, 
+		$location, $mdDialog, $mdToast ){
 	
 	$scope.jurnals=[];
 	
@@ -24,6 +26,12 @@ appControllers.controller('jurnalController',
 		getAllJurnal();
 	}
 
+	$scope.openMenu = function($mdOpenMenu, ev) {
+      originatorEv = ev;
+      $mdOpenMenu(ev);
+    };
+
+
 	$scope.loadIsi = function (){
 		$scope.showCari = !$scope.showCari ;		
 	}
@@ -46,6 +54,40 @@ appControllers.controller('jurnalController',
 		$window.open($rootScope.pathServerJSON + '/api/transaksi/jurnalDetil/voucher/'+id, '_blank');
 	}
 
+	$scope.deleteFisikVouc = function(id, $event){
+
+		var konfirmasi = $mdDialog.confirm()
+			.title('Konfirmasi')
+			.textContent('Apakah anda yakin akan menghapus data ini ['+id+'] ?? ')
+			.ariaLabel('konfirmasi')
+			.targetEvent($event)
+			.ok('OK')
+			.cancel('Batal');
+
+		$mdDialog.show(konfirmasi)
+			.then(function(){
+				jurnalHeaderFactory
+	    			.delete(id)
+	    			.then(function(response){	
+	    				$mdToast.show(	
+							$mdToast.simple()
+								.textContent('delete success ...' )
+								.position("top right")
+								.hideDelay(2000)
+							);												
+						getAllJurnal(); 						
+	    			})
+			},function(){
+		    	$mdToast.show(	
+					$mdToast.simple()
+						.textContent('delete batal...' )
+						.position("top right")
+						.hideDelay(2000)
+					);	
+				// console.log('batal hapus ')
+			})
+	}
+
 	function getAllStatusVoucher(){
 			
 		statusVoucherFactory
@@ -61,8 +103,8 @@ appControllers.controller('jurnalController',
 	}
 
 	function getAllJurnal(){			
-		console.log($scope.tgl1);
-		console.log($scope.tgl2);
+		//console.log($scope.tgl1);
+		//console.log($scope.tgl2);
 		var vTgl1 = $filter('date')($scope.tgl1,'yyyy-MM-dd');
 		var vTgl2 = $filter('date')($scope.tgl2,'yyyy-MM-dd');
 		var statusVouch;

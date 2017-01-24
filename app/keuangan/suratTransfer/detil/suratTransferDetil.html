@@ -1,0 +1,137 @@
+<div  ng-cloak>
+    <md-toolbar class="md-menu-toolbar md-warn ">
+        <div layout="row">
+            <md-toolbar-filler layout layout-align="center center">
+                <md-icon md-svg-icon="images/material-design-icons-3.0.1/navigation/svg/production/ic_apps_36px.svg" aria-label="left-menu"></md-icon>
+            </md-toolbar-filler>            
+            <div>    
+                <md-menu-bar>
+                    <md-menu>
+                        <button ng-click="$mdOpenMenu()">
+                            Menu
+                        </button>
+                            <md-menu-content>
+                                <md-menu-item>
+                                    <md-button ng-click="transaksiBaru()">
+                                        New Transaction
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-item>
+                                    <md-button ng-click="saveHeader()" ng-disabled="isTransApproved">
+                                        Save<span class="md-alt-text"> {{ 'M-O' | keyboardShortcut }}</span>
+                                    </md-button>
+                                </md-menu-item>
+                                <md-menu-item>
+                                    <md-button ng-click="approve()" ng-disabled="isTransApproved">
+                                        Approve<span class="md-alt-text"> {{ 'M-A' | keyboardShortcut }}</span>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-divider></md-menu-divider>              
+                                <md-menu-item>
+                                    <md-button ng-click="preview()">
+                                        Print<span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span>
+                                    </md-button>
+                                </md-menu-item>
+
+                                <md-menu-divider></md-menu-divider>            
+                                <md-menu-item>
+                                    <md-button ng-click="toListSuratTransfer()">
+                                        List<span class="md-alt-text">{{ 'M-P' | keyboardShortcut }}</span>
+                                    </md-button>
+                                </md-menu-item>              
+                            </md-menu-content>
+                    </md-menu>
+                </md-menu-bar>
+            </div>
+        </div>
+    </md-toolbar>
+
+<md-content  layout ="row"   >
+    <md-card flex="90" flex-offset="5" class="md-whiteframe-20dp">
+        <md-card-content class="column">
+            <div layout="row">
+                <md-input-container flex="5" >
+                    <label>ID</label>
+                    <input ng-model="suratTransferHd.id" disabled/>
+                </md-input-container>
+
+                <md-input-container  >
+                    <label>Tanggal </label>
+                    <md-datepicker ng-model="tglSurat"   ></md-datepicker>
+                </md-input-container>
+
+                <md-input-container flex="20">
+                    <label>Bank</label>
+                    <md-select ng-model="bankSelected" ng-model-options="{trackBy: '$value.id'}">
+                        <md-option ng-repeat="bank in banks" ng-value="bank" >
+                        {{bank.nama}}
+                        </md-option>
+                    </md-select>              
+                </md-input-container> 
+                
+<!--             </div>
+
+            <div layout="row"> -->
+                <md-input-container flex="20">
+                    <label>No Cek</label>
+                    <input ng-model="suratTransferHd.noCek" id="noCek"/>
+                </md-input-container>
+
+                <md-input-container flex="20">
+                    <label>No Approve</label>
+                    <input ng-model="suratTransferHd.noApprove" disabled />
+                </md-input-container>       
+                <div flex>
+                    <p>
+                        <md-button aria-label="Open action" class="md-raised md-warn"  ng-click="tarikJurnal($event)" ng-disabled="isTransApproved" >Tarik data                        
+                        </md-button>                                            
+                    </p>
+                </div>       
+            </div>                             
+        <!-- TABLE DETIL -->
+            <div class="md-whiteframe-20dp" layout-padding flex=98 flex-offset=1>
+            <md-table-container>
+                <table md-table  >
+                    <thead md-head  >
+                        <tr md-row>
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>ID</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>No Urut</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>Issue Date</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Customer</span> </th>
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Bank</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>Keterangan</span></th> 
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>Jumlah</span> </th>
+                            <th md-column style="color:rgb(128, 255, 128)" ><span>Action</span> </th>
+                        </tr>   
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row  ng-repeat='suratTransferDetil in suratTransferDts ' >
+                            <td md-cell>{{suratTransferDetil.id}}</td>            
+                            <td md-cell>{{suratTransferDetil.jurnalDetil.jurnalHeader.noUrut | uppercase}}</td>
+                            <td md-cell>{{suratTransferDetil.jurnalDetil.jurnalHeader.issueDate | date:'dd-MMM-yyyy'}}</td>
+                            <td md-cell>{{suratTransferDetil.jurnalDetil.customer.nama | uppercase}}</td>
+                            <td md-cell>{{suratTransferDetil.jurnalDetil.bank.nama | uppercase}}</td>
+                            <td md-cell>{{suratTransferDetil.jurnalDetil.keterangan | uppercase}}</td> 
+                            <td md-cell>{{suratTransferDetil.jurnalDetil.kredit | currency:'Rp':0}}</td>                             
+                            <td md-cell>                                
+                                <md-button class="md-warn" ng-click='hapusDetil(suratTransferDetil.id)' ng-disabled="isTransApproved">Delete
+                                    <md-tooltip>
+                                        {{suratTransferDetil.jurnalDetil.jurnalHeader.noUrut | uppercase}} - {{suratTransferDetil.jurnalDetil.customer.nama | uppercase}} - {{suratTransferDetil.jurnalDetil.kredit | currency:'Rp':0}}
+                                    </md-tooltip>
+                                </md-button>                                     
+                            </td>     
+                        </tr>       
+                    </tbody>
+                </table>            
+            </md-table-container>
+            <md-table-pagination md-limit="itemsPerPage" md-page="currentPage" md-total="{{totalItems}}" md-on-paginate="getAll" ></md-table-pagination>
+        <!-- TABLE DETIL -->
+            </div>
+        </md-card-content>
+        
+    </md-card>    
+
+</md-content>
+</div>

@@ -14,18 +14,20 @@ appControllers.controller('loginController',
         right: true
     }
 
+
+
 	$scope.login = function () {  
 
         
 
         // NO auth 
-         // AuthenticationService.SetCredentials(0, 'testing');
-         // $rootScope.isLogin=true; 
-         // $rootScope.xAuth=true;          
-         // //$location.path('#/masterUser'); 
-         // $window.location = "#/masterUser";   
+        // AuthenticationService.SetCredentials(0, 'testing');
+        // $rootScope.isLogin=true; 
+        // $rootScope.xAuth=true;          
+        //  // $location.path('#/masterUser'); 
+        // $window.location = "#/masterUser";   
         
-         // return true;
+        //  return true;
         // -- NO auth 
 
         AuthenticationService
@@ -70,5 +72,6 @@ appControllers.controller('loginController',
 
     };
 
-	
+	focus('inputID');
+    
 }])

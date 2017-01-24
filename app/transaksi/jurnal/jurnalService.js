@@ -86,6 +86,16 @@
 			url:urlApi + '/byJenisVoucher/issueDate/'+tgl1+'/'+tgl2+'/jenisVouc/'+jenisVouc+'/page/'+hal+'/'+jumlah
 		})
 	};			
+
+	jurnalHeaderFactory.listVoucherBelumPosting=function(tgl1, tgl2, jenisVouc, hal, jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi + '/listVoucherBelumPosting/issueDate/'+tgl1+'/'+tgl2+'/jenisVouc/'+jenisVouc+'/page/'+hal+'/'+jumlah
+		})
+	};			
+
+
+	
 	
 
 	return jurnalHeaderFactory;
