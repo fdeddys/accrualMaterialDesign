@@ -1,6 +1,6 @@
 appControllers.controller('postingController', 
-	['$scope','jurnalHeaderFactory', '$rootScope', '$filter','$routeParams','bukuBesarFactory',
-	function($scope,jurnalHeaderFactory, $rootScope,$filter, $routeParams , bukuBesarFactory){
+	['$scope','jurnalHeaderFactory', '$rootScope', '$filter','$routeParams','bukuBesarFactory','$mdToast',
+	function($scope,jurnalHeaderFactory, $rootScope,$filter, $routeParams , bukuBesarFactory, $mdToast){
 	
 	$scope.jurnals=[];	
 	$scope.search='';
@@ -86,6 +86,12 @@ appControllers.controller('postingController',
 				.postingTrial(idHdr)
 				.then(function(response){
 					getAllJurnal($scope.currentPage);
+					$mdToast.show(
+						$mdToast.simple()
+							.textContent('POSTING success !!!')
+							.position("top right")
+							.hideDelay(2000)
+						);
 				})
 
 		}else{
@@ -94,6 +100,12 @@ appControllers.controller('postingController',
 			bukuBesarFactory
 				.postingTrial(idHdr)
 				.then(function(response){
+					$mdToast.show(
+						$mdToast.simple()
+							.textContent('POSTING success !!!')
+							.position("top right")
+							.hideDelay(2000)
+						);					
 					getAllJurnal($scope.currentPage);
 				})
 		}

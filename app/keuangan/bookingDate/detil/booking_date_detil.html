@@ -1,0 +1,60 @@
+<md-dialog arial-label="Detil" flex="80" >
+    <form ng-cloak>
+<!--     <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Bagian</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click='tutupDetil()'>
+                <md-icon md-svg-src="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg" aria-label="Close dialog" ></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar> -->
+<!-- style="width:800px;max-height:810px; " -->
+    <md-dialog-content   >
+        <div class="md-dialog-content">   
+
+            <md-table-container>
+                <table md-table  >
+                    <thead md-head  >
+                        <tr md-row>
+                            <th md-column style="color:rgb(128, 255, 128)"><span>#</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Kode</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Nama</span> </th>
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Bagian</span> </th>
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Keterangan</span> </th>
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Rel</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Cust</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Bank</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Debet</span> </th> 
+                            <th md-column style="color:rgb(128, 255, 128)"><span>Kredit</span> </th> 
+                        </tr>   
+                    </thead>
+                    <tbody md-body>
+                        <tr md-row ng-repeat='jurnalDetil in jurnalDetils ' >
+                            <td md-cell>{{$index+1}}.</td>
+                            <td md-cell>{{jurnalDetil.accountDetil.kodePerkiraan | uppercase}}</td>
+                            <td md-cell>{{jurnalDetil.accountDetil.namaPerkiraan | uppercase}}</td>    
+                            <td md-cell>{{jurnalDetil.bagian.kode | uppercase}}</td>
+                            <td md-cell>{{jurnalDetil.keterangan | uppercase}}</td>
+                            <td md-cell>{{jurnalDetil.rel | uppercase}}</td>
+                            <td md-cell>{{jurnalDetil.customer.kode | uppercase}}</td>               
+                            <td md-cell>{{jurnalDetil.bank.kode  }}</td>
+                            <td md-cell>{{jurnalDetil.debet| number }}</td>
+                            <td md-cell>{{jurnalDetil.kredit | number }}</td>          
+                        </tr>       
+                    </tbody>
+                </table>            
+            </md-table-container>            
+        </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button class="md-warn" ng-click='ok()'>
+            Close
+        </md-button>        
+        
+    </md-dialog-actions>    
+    </form>
+
+</md-dialog>

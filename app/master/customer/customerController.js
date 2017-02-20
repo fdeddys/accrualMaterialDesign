@@ -18,7 +18,14 @@ appControllers.controller('customerController',
 	getAllCustomer($scope.currentPage);
 
 	$scope.loadIsi = function (){
-		$scope.showCari = !$scope.showCari ;		
+		$scope.showCari = !$scope.showCari ;	
+		if($scope.showCari == true){
+			focus('idCari');			
+		}else{
+			$scope.search='';			
+			getAllCustomer();
+		}
+		// focus('idCari');	
 	}
 
 	$scope.getAll=function(){

@@ -207,14 +207,14 @@
                             <!-- md-on-open="loadBanks()" -->
                             <md-select ng-model="jurnalDetil.bank" ng-model-options="{trackBy: '$value.id'}" ng-disabled="kondisiView || !enableBank" >
                                 <md-option ng-repeat="bank in banks" ng-value="bank"  >
-                                {{bank.nama}}
+                                {{bank.kode}}
                                 </md-option>
                             </md-select>
                         </md-input-container>
 
                         <md-input-container flex="20">
-                            <label>kode</label>
-                            <input type="text" ng-model="jurnalDetil.bank.kode" disabled >
+                            <label>Nama</label>
+                            <input type="text" ng-model="jurnalDetil.bank.nama" disabled >
                         </md-input-container>
 
                         <md-input-container flex="25">

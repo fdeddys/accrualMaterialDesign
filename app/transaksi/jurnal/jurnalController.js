@@ -7,7 +7,7 @@ appControllers.controller('jurnalController',
 	$scope.jurnals=[];
 	
 	$scope.search='';	
-	$scope.showCari = false;
+	$scope.showCari = false;	
 
 	$scope.jenisTransaksi;
 	//1. add
@@ -69,9 +69,22 @@ appControllers.controller('jurnalController',
 				jurnalHeaderFactory
 	    			.delete(id)
 	    			.then(function(response){	
+	    				// console.log("respon = " + JSON.parse(response.data));
+	    				// console.log("respon = " + respon.hasil);
+	    				// return ;
+	    				// var pesan={
+	    				// 	hasil:''
+	    				// };
+	    				respon = angular.fromJson(response.data);
+	    				var pesan;
+	    				if(respon.hasil=='OK'){
+	    					pesan ="delete success"
+	    				}else{
+	    					pesan = respon.hasil;
+	    				}
 	    				$mdToast.show(	
 							$mdToast.simple()
-								.textContent('delete success ...' )
+								.textContent(pesan )
 								.position("top right")
 								.hideDelay(2000)
 							);												

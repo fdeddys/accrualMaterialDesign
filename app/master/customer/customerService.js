@@ -45,6 +45,15 @@ appServices.factory('customerFactory',['$http','$rootScope',function($http,$root
 		});
 	};
 
+
+	customersFactory.getActiveCustomerByNamaPage=function(nama, hal, jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi + '/active/nama/' + nama + '/hal/' + hal + '/jumlah/' + jumlah  				
+		});
+	};
+
+
 	customersFactory.isKodeExis=function(kode){
 		return $http({
 			method:'GET',

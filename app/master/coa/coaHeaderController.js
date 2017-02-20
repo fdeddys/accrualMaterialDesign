@@ -1,6 +1,6 @@
 appControllers.controller('coaHeaderController', 
-	['$scope','coaHdrFactory', '$window','$rootScope','$mdDialog',
-	function($scope,coaHdrFactory, $window, $rootScope, $mdDialog){
+	['$scope','coaHdrFactory', '$window','$rootScope','$mdDialog','focus',
+	function($scope,coaHdrFactory, $window, $rootScope, $mdDialog, focus){
 
 	$scope.coas=[];
 	
@@ -16,7 +16,8 @@ appControllers.controller('coaHeaderController',
 	getAllCoa($scope.currentPage);
 
 	$scope.loadIsi = function (){
-		$scope.showCari = !$scope.showCari ;		
+		$scope.showCari = !$scope.showCari ;	
+		focus('idCariKode');	
 	}
 
 	$scope.getAll=function(){
@@ -105,7 +106,7 @@ appControllers.controller('coaHeaderController',
 	};
 	
 	$scope.previewLaporan=function(){
-		 $window.open($rootScope.pathServerJSON + '/api/coa/laporan', '_blank');
+		 $window.open($rootScope.pathServerJSON + '/api/accountDtl/laporan', '_blank');
 	}
 
 }])

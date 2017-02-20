@@ -71,6 +71,13 @@ appServices.factory('jurnalDetilFactory', ['$http','$rootScope', function($http,
 			method:'GET',
 			url:urlApi + '/listVoucST/bank/'+idBank+'/noUrut/'+noUrut+'/hal/'+hal+'/jumlah/'+jumlah
 		})
+	};
+
+	jurnalDetilFactory.listVouchInputBook = function(tglAwal, tglAkhir, hal, jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi + '/listJurnalForInputBook/tglAwal/'+tglAwal+'/tglAkhir/'+tglAkhir+'/hal/'+hal+'/jumlah/'+jumlah
+		})
 	}
 
 	return jurnalDetilFactory;

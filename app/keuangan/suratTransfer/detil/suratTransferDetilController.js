@@ -105,6 +105,7 @@ appControllers.controller('suratTransferDetilController',
     		.approve(idHd, idUser)
     		.success(function(data){
     			$scope.suratTransferHd = data;
+    			$scope.isTransApproved = true;
     		})
     }
 

@@ -62,11 +62,26 @@ appControllers.controller('indexController',
         tutupSideMenu();
         $location.path('/posting/true');         
     }
+    
+    $scope.batalPosting = function() {
+        tutupSideMenu();
+        $location.path('/batalPosting');         
+    }    
+
+    $scope.bukuBesarTrial = function() {
+        tutupSideMenu();
+        $location.path('/bukuBesarTrial');                 
+    }
 
     $scope.suratTransfer = function() {
         tutupSideMenu();
         $location.path('/suratTransfer');         
     }
+
+    $scope.bookDate = function() {
+        tutupSideMenu();
+        $location.path('/bookDate');         
+    }    
 
     $scope.masterUser = function(){
         tutupSideMenu();

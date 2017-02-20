@@ -169,6 +169,14 @@ myApp.config(['$routeProvider','$locationProvider','growlProvider',
 			templateUrl:'partials/transaksi/jurnalBalik.html',
 			controller: 'jurnalBalikController'
 		}).	
+		when('/bukuBesarTrial',{
+			templateUrl:'app/transaksi/bukuBesarTrial/bukuBesarTrial.html',
+			controller: 'bukuBesarTrialController'
+		}).
+		when('/batalPosting',{
+			templateUrl:'app/transaksi/batalPosting/batalPosting.html',
+			controller: 'batalPostingController'
+		}).
 		when('/suratTransfer',{
 			templateUrl:'app/keuangan/suratTransfer/suratTransfer.html',
 			controller: 'suratTransferController'
@@ -176,6 +184,10 @@ myApp.config(['$routeProvider','$locationProvider','growlProvider',
 		when('/suratTransfer/:id',{
 			templateUrl:'app/keuangan/suratTransfer/detil/suratTransferDetil.html',
 			controller: 'suratTransferDetilController'
+		}).
+		when('/bookDate',{
+			templateUrl:'app/keuangan/bookingDate/booking_date.html',
+			controller: 'bookDateController'
 		}).			
 		when('/inputBooking',{
 			templateUrl:'partials/transaksi/isiBooking.html',

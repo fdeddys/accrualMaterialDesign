@@ -52,6 +52,7 @@
 						<th md-column style="color:rgb(128, 255, 128)"><span>Cabang</span> </th> 
 						<th md-column style="color:rgb(128, 255, 128)"><span>Kota</span> </th> 
 						<th md-column style="color:rgb(128, 255, 128)"><span>No Acc</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)"><span>Status</span> </th> 
 						<th md-column style="color:rgb(128, 255, 128)"><span>Action</span> </th> 
 
 					</tr>	
@@ -63,6 +64,7 @@
 						<td md-cell>{{bank.namaCabangBank | uppercase}}</td>				
 						<td md-cell>{{bank.kota | uppercase}}</td> 
 						<td md-cell>{{bank.noAccount}}</td> 
+						<td md-cell>{{bank.status}}</td> 
 						<td md-cell>
 							<md-button class="md-warn" ng-click='edit(bank.id,$event)'>Edit
 							<md-tooltip>

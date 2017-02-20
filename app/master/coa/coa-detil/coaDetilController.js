@@ -1,6 +1,6 @@
 appControllers.controller('coaDetilController', 
-	['$scope','coaDtlFactory', '$window','$rootScope','$mdDialog',
-	function($scope,coaDtlFactory, $window, $rootScope, $mdDialog){
+	['$scope','coaDtlFactory', '$window','$rootScope','$mdDialog','focus',
+	function($scope,coaDtlFactory, $window, $rootScope, $mdDialog, focus){
 
 	$scope.coas=[];
 	
@@ -16,7 +16,8 @@ appControllers.controller('coaDetilController',
 	getAllCoa($scope.currentPage);
 
 	$scope.loadIsi = function (){
-		$scope.showCari = !$scope.showCari ;		
+		$scope.showCari = !$scope.showCari ;	
+		focus('idCariKode');	
 	}
 
 	$scope.getAll=function(){

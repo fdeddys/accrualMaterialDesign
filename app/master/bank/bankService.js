@@ -11,6 +11,14 @@ appServices.factory('bankFactory', ['$http','$rootScope', function($http,$rootSc
 		});		
 	};
 
+	bankFactory.getAllActiveBank=function(hal,jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi+'/active/hal/'+hal+'/jumlah/'+jumlah,
+			headers:{'Content-Type':'application/json'}	
+		});		
+	};
+
 	bankFactory.getAllNonKasBank=function(hal,jumlah){
 		return $http({
 			method:'GET',

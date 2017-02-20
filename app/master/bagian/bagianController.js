@@ -19,7 +19,14 @@ appControllers.controller('bagianController',
 	getAllBagian($scope.currentPage);
 
 	$scope.loadIsi = function (){
-		$scope.showCari = !$scope.showCari ;		
+		$scope.showCari = !$scope.showCari ;	
+		if($scope.showCari == true){
+			focus('idCari');			
+		}else{
+			$scope.search='';			
+			getAllBagian();
+		}
+		// focus('idCari');	
 	}
 
 	$scope.getAll=function(){

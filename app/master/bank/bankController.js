@@ -1,6 +1,6 @@
 appControllers.controller('bankController', 
-	['$scope','bankFactory', '$window','$rootScope','$mdDialog',
-	function($scope,bankFactory, $window, $rootScope, $mdDialog){
+	['$scope','bankFactory', '$window','$rootScope','$mdDialog','focus',
+	function($scope,bankFactory, $window, $rootScope, $mdDialog, focus){
 
 	$scope.banks=[];
 	
@@ -19,6 +19,7 @@ appControllers.controller('bankController',
 
 	$scope.loadIsi = function (){
 		$scope.showCari = !$scope.showCari ;		
+		focus('idCari');
 	}
 
 	$scope.getAll=function(){

@@ -3,7 +3,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		  <!-- Angular Material style sheet -->
 		<link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
-		<link rel="stylesheet" type="text/css" href="node_modules/angular-material-data-table/dist/md-data-table.min.css"">
+		<link rel="stylesheet" type="text/css" href="node_modules/angular-material-data-table/dist/md-data-table.min.css" >
 		<link rel="stylesheet" href="app/css/myStyle.css">
 		<link rel="shortcut icon" href="favicon.ico"/>
 		<title>Accrual Basic ver :01</title>	
@@ -87,13 +87,13 @@
 				<md-list-item  ng-click="postingPengeluaran()">
 					<p>Post. Pengeluaran</p>										
 				</md-list-item>
-				<md-list-item  ng-click="null">
+				<md-list-item  ng-click="batalPosting()">
 					<p>Batal Posting</p>										
 				</md-list-item>
 				<md-list-item  ng-click="null">
 					<p>Delete Jurnal</p>										
 				</md-list-item>
-				<md-list-item  ng-click="null">
+				<md-list-item  ng-click="bukuBesarTrial()">
 					<p>Buku Besar Trial</p>										
 				</md-list-item>
 
@@ -103,7 +103,7 @@
 				<md-list-item  ng-click="suratTransfer()">					
 					<p>Surat Transfer</p>								
 				</md-list-item>
-				<md-list-item  ng-click="null">
+				<md-list-item  ng-click="bookDate()">
 					<p>Booking Date</p>
 				</md-list-item>
 
@@ -198,15 +198,25 @@
 		<script type="text/javascript" src="app/transaksi/jurnal/detil/jurnalDetilService.js"></script>
 		<script type="text/javascript" src="app/transaksi/jurnal/detil/jurnalDetilController.js"></script>
 
+		<!-- 	BUKU BESAR TRIAL -->
+		<script type="text/javascript" src="app/transaksi/bukuBesarTrial/bukuBesarTrialService.js"></script>
+		<script type="text/javascript" src="app/transaksi/bukuBesarTrial/bukuBesarTrialController.js"></script>
+
 		<!-- KEUANGAN -->
 		<!-- 	SURAT TRANSFER-->
 		<script type="text/javascript" src="app/keuangan/suratTransfer/suratTransferService.js"></script>
 		<script type="text/javascript" src="app/keuangan/suratTransfer/suratTransferController.js"></script>
 		<script type="text/javascript" src="app/keuangan/suratTransfer/detil/suratTransferDetilController.js"></script>		
 		<script type="text/javascript" src="app/keuangan/suratTransfer/detil/tarikData/tarikDataController.js"></script>		
+		<!-- 	BOOK DATE -->
+		<script type="text/javascript" src="app/keuangan/bookingDate/booking_date_controller.js"></script>
+		<script type="text/javascript" src="app/keuangan/bookingDate/booking_date_service.js"></script>
+		<script type="text/javascript" src="app/keuangan/bookingDate/detil/booking_date_detil_controller.js"></script>
 		
+
 		<!-- 	POSTING-->
 		<script type="text/javascript" src="app/transaksi/posting/postingController.js"></script>
+		<script type="text/javascript" src="app/transaksi/batalPosting/batalPostingController.js"></script>
 
 		<!-- Utility -->
 		<!-- 	- User -->

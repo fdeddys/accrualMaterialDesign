@@ -144,7 +144,7 @@ appControllers.controller('jurnalDetilController',
 						$location.path('/');
 					}else{				
 						$scope.jurnalHeader=data;						
-						$scope.jurnalHeader.issueDate= new Date($scope.jurnalHeader.issueDate)
+						$scope.jurnalHeader.issueDate= new Date($scope.jurnalHeader.issueDate);
 
 						//console.log('get by id ' + data.issueDate);
 						getAllDetil();
@@ -183,7 +183,7 @@ appControllers.controller('jurnalDetilController',
 	
 	function getAllCoaDetil(){
 		coaDtlFactory
-			.getCoaDtlByPage(1,1000,0)
+			.getCoaAktifDtlByKodePage('--',1,15)
 			.success(function(data){
 				$scope.coaDetils = data.content;
 			})
@@ -200,7 +200,7 @@ appControllers.controller('jurnalDetilController',
 
 	function getAllBagian(){
 		bagianFactory
-			.getAllBagianPage(1,1000)
+			.getAllBagianAktifPage(1,1000)
 			.success(function(data){
 				$scope.bagians = data.content;
 			})
@@ -218,7 +218,7 @@ appControllers.controller('jurnalDetilController',
 	function getAllBank(){
 		
 		bankFactory
-			.getAllBank(1,1000)
+			.getAllActiveBank(1,1000)
 			.success(function(data){
 				$scope.banks = data.content;
 				// growl.addInfoMessage('get bank success');	
@@ -262,7 +262,7 @@ appControllers.controller('jurnalDetilController',
 			return false;
 		}
 		return bagianFactory
-				.getBagianByKodePage(searchText, 1, 8)
+				.getBagianByKodeAktifPage(searchText, 1, 8)
 				.then(function(response){
 					//console.log('load http' + response.data.nama); 
 					bagians=[];
@@ -303,7 +303,7 @@ appControllers.controller('jurnalDetilController',
 	    	}
 
 			return coaDtlFactory
-					.getCoaDtlByKodePage(cari, 1, 15, true)
+					.getCoaAktifDtlByKodePage(cari, 1, 15)
 					.then(function(response){
 						//console.log('load http' + response.data.nama); 
 						var coas=[];
@@ -340,36 +340,24 @@ appControllers.controller('jurnalDetilController',
 	// lost focus coa
 	$scope.myFunct = function(keyEvent, idx) {
 
-		// if($scope.jurnalDetil.accountDetil.kodePerkiraan===coaBank || $scope.jurnalDetil.accountDetil.kodePerkiraan===coaKas){
-		// 	// alert('masuk coa bank');
-		// 	if($scope.jurnalDetil.dk==='K'){
-		// 		// alert('masuk K');
-				
-		// 	}			
-		// }		
-		
-		if($scope.selectedCoa===null){
-			//console.log("$scope.jurnalDetil.accountDetil==null")
+		// *)JURNAL PENGELUARAN  ==> customer harus ENABLE
+		if($scope.selectedCoa===null){			
 			return false;	
 		}else{
 			$scope.enableBank=$scope.selectedCoa.cashBank;
+			$scope.enableRel = $scope.selectedCoa.rel;	  	
+
+			// *)JURNAL PENGELUARAN  ==> customer harus ENABLE
 			if($scope.jurnalHeader.jenisVoucher==='PENGELUARAN'){
-			// alert('masuk pengeluaran');
-			//console.log($scope.jurnalHeader.jenisVoucher);
-				$scope.enableCust=true;
-				$scope.enableRel=true;								
-			}else{
-				
+				$scope.enableCust=true;					
+			}else{				
 				$scope.enableCust=$scope.selectedCoa.cust;
-				$scope.enableRel = $scope.selectedCoa.rel;	  							
 			}
 		}
 
-		if($scope.selectedCoa.accountHeader===undefined){
-			//console.log("$scope.jurnalDetil.bagian==null")
+		if($scope.selectedCoa.accountHeader===undefined){			
 			return false;	
-		}
-		
+		}		
 
 		if($scope.selectedCoa.accountHeader.idAccountHdr==undefined){
 			//console.log("$scope.jurnalDetil.accountDetil.accountHeader.idAccountHdr===undefined")
@@ -480,19 +468,6 @@ appControllers.controller('jurnalDetilController',
 	};
 
 	$scope.tambahDetilNEW=function(){
-		// $scope.jurnalDetil={
-		// 	id: null,
-		// 	jurnalHeader: null,
-		// 	accountDetil: null,
-		// 	bagian: null,
-		// 	keterangan: null,
-		// 	debet: null,
-		// 	kredit: null,
-		// 	bank: null,
-		// 	rel: null,
-		// 	customer: null,
-		// 	dk:'D'
-		// };
 
 		$scope.jurnalDetil={
 			id: null,
@@ -521,10 +496,63 @@ appControllers.controller('jurnalDetilController',
 
 	$scope.tambahDetil=function($event){		
 
-		
+		// 1) untuk jurnal pemindahan tidak boleh KAS/BANK
+		if($scope.jurnalHeader.jenisVoucher==='PEMINDAHAN'){
+			if ($scope.selectedCoa.kodePerkiraan == coaKas) {
+				$mdToast.show(	
+					$mdToast.simple()
+						.textContent("Jurnal PEMINDAHAN COA tidak boleh KAS / BANK !")
+						.position("bottom right")
+						.hideDelay(3000)
+					);				
+				return false;
+			}
 
-		if($scope.jurnalHeader.id==0){
-			//console.log("jurnal header id ==0" );
+			if ($scope.selectedCoa.kodePerkiraan == coaBank) {
+				$mdToast.show(	
+					$mdToast.simple()
+						.textContent("Jurnal PEMINDAHAN COA tidak boleh KAS / BANK !")
+						.position("bottom right")
+						.hideDelay(3000)
+					);				
+				return false;
+			}
+		}
+		// 1) END 
+
+
+		// 2) untuk jurnal pembayaran untuk kredit hanya boleh KAS/BANK
+		var validasiVoucPengeluaran =false;
+		if($scope.jurnalHeader.jenisVoucher==='PENGELUARAN'){
+			if($scope.jurnalDetil.dk == "K"){
+				if ($scope.selectedCoa.kodePerkiraan == coaKas) {
+					validasiVoucPengeluaran = true									
+				}else{				
+					if ($scope.selectedCoa.kodePerkiraan == coaBank) {
+						validasiVoucPengeluaran = true
+					}
+				}
+			}else{
+				validasiVoucPengeluaran =true
+			}
+		}else{
+			validasiVoucPengeluaran =true
+		}
+
+		if(validasiVoucPengeluaran == false){
+			$mdToast.show(	
+				$mdToast.simple()
+					.textContent("Jurnal PENGELUARAN pada kredit HARUS KAS / BANK !")
+					.position("bottom right")
+					.hideDelay(3000)
+				);				
+			return false;			
+		}
+
+		// 2) END
+
+
+		if($scope.jurnalHeader.id==0){			
 
 			var defHdr = simpanHeader()
 				.then(function(success){
@@ -615,6 +643,10 @@ appControllers.controller('jurnalDetilController',
 			}
 		};
 
+		if ($scope.selectedbBagian === undefined) {		
+			deferred.reject('Bagian belum ada !!');
+			return deferred.promise;	
+		};
 
 		$scope.jurnalDetil.accountDetil = $scope.selectedCoa;
 		if ($scope.jurnalDetil.accountDetil === null) {
@@ -752,8 +784,11 @@ appControllers.controller('jurnalDetilController',
 				$scope.jurnalDetil.jurnalHeader=$scope.jurnalHeader;
 				// growl.addInfoMessage('save header success');
 				$scope.headerAda =true;
-				if($scope.jurnalHeader.bookingDate==null){
+				if($scope.jurnalHeader.bookingDate	==null){
 					$scope.tglBooking = null;
+				}else{
+					$scope.tglBooking = new Date($scope.jurnalHeader.bookingDate) ;
+					console.log($scope.jurnalHeader.bookingDate);
 				}
 
 				deferred.resolve('sukses');			
@@ -920,7 +955,7 @@ appControllers.controller('jurnalDetilController',
 			//console.log("scope customer = " + $scope.jurnalDetil.customer );
 	        return customers;			
 		}else{
-	        return customerFactory.getCustomerByNamaPage(val,1,15).then(function (response) {
+	        return customerFactory.getActiveCustomerByNamaPage(val,1,15).then(function (response) {
 	            var customers=[];
 	            //console.log('jumlah response : ' + response.data.content.length);
 	            angular.forEach(response.data.content, function(item){

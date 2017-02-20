@@ -19,7 +19,13 @@ appControllers.controller('direktoratController',
 	getAllDirektorat();
 
 	$scope.loadIsi = function (){
-		$scope.showCari = !$scope.showCari ;		
+		$scope.showCari = !$scope.showCari ;	
+		if($scope.showCari == true){
+			focus('idCari');			
+		}else{
+			$scope.search='';			
+			getAllDirektorat();
+		}
 	}
 
 	$scope.getAll=function(){
@@ -56,7 +62,7 @@ appControllers.controller('direktoratController',
 
 	function getAllDirektorat(){
 		//alert('get all kode arsip');
-
+		//console.log($scope.search);
 		if($scope.search===''){
 			direktoratFactory
 				.getAllDirektorat()

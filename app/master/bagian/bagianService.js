@@ -10,10 +10,24 @@ appServices.factory('bagianFactory', ['$http','$rootScope', function($http,$root
 		});
 	}
 
+	bagianFactory.getAllBagianAktifPage=function(hal, jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi + '/aktif/hal/' + hal + '/jumlah/' + jumlah
+		});
+	}
+
 	bagianFactory.getBagianByKodeByNamaPage=function(kode, nama, hal, jumlah){
 		return $http({
 			method:'GET',
 			url:urlApi+'/kode/'+kode+'/nama/'+nama+'/hal/'+hal+'/jumlah/'+jumlah
+		});
+	}
+
+	bagianFactory.getBagianByKodeByNamaAktifPage=function(kode, nama, hal, jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi+'/aktif/kode/'+kode+'/nama/'+nama+'/hal/'+hal+'/jumlah/'+jumlah
 		});
 	}
 
@@ -31,6 +45,13 @@ appServices.factory('bagianFactory', ['$http','$rootScope', function($http,$root
 		});
 	}
 
+	bagianFactory.getBagianByKodeAktifPage=function(kode, hal, jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi+'/aktif/kode/'+kode+'/hal/'+hal+'/jumlah/'+jumlah
+		});
+	}
+
 	bagianFactory.isKodeBagianSudahAda = function(kode){
 		return $http({
 			method:'GET',
@@ -42,6 +63,13 @@ appServices.factory('bagianFactory', ['$http','$rootScope', function($http,$root
 		return $http({
 			method:'GET',
 			url:urlApi+'/nama/'+nama+'/hal/'+hal+'/jumlah/'+jumlah
+		});
+	}
+
+	bagianFactory.getBagianByNamaAktifPage=function(nama, hal, jumlah){
+		return $http({
+			method:'GET',
+			url:urlApi+'/aktif/nama/'+nama+'/hal/'+hal+'/jumlah/'+jumlah
 		});
 	}
 

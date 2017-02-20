@@ -1,6 +1,6 @@
 <md-card>
 	<md-card-content>
-		<md-toolbar class="md-table-toolbar md-default" ng-show="!showCari" >
+<!-- 		<md-toolbar class="md-table-toolbar md-default" ng-show="!showCari" >
 			<div class="md-toolbar-tools">
 				<h4 class="md-headline">Jurnal</h4> 
 				<span flex></span>				
@@ -18,13 +18,16 @@
 				</md-button>
 				
 			</div>
-		</md-toolbar>
+		</md-toolbar> -->
 
-		<md-toolbar class="md-table-toolbar md-default" ng-show="showCari">
+		<md-toolbar class="md-table-toolbar md-default" >
 			<br>
 			<div class="md-toolbar-tools">
-				<div layout="row">
-					<!-- <div class="column"> -->
+				<div layout="row">					
+						<md-input-container flex=20>
+							<label >.</label>
+							<input type='text' value="" e="BATAL POSTING" >
+						</md-input-container>					
 						<md-input-container flex=20>
 							<label >No urut</label>
 							<input type='text' ng-model='searchNoUrut'  >
@@ -35,37 +38,18 @@
 						</md-input-container>													
 						<md-input-container >	
 							<label>Tanggal Awal </label>
-							<!-- <md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_date_range_48px.svg"></md-icon> -->
-							<!-- <div> -->
-								<!-- <md-button class="md-fab md-mini md-primary md-hue-2" aria-label="preview" > -->
-								<!--  		 -->
-								<!-- </md-button> -->
 							<md-datepicker ng-model="tgl1" ></md-datepicker>		
-							<!-- </div> -->
 						</md-input-container>
 						<md-input-container   >
 							<label>Tanggal Akhir </label>
 							<md-datepicker ng-model="tgl2" ></md-datepicker>
 						</md-input-container>		
-						<md-input-container >
-							<label>Status </label>
-							<md-select ng-model="statusVoucher" >
-								<md-option ng-repeat="statusVoucher in statusVouchers" ng-value="statusVoucher">
-									{{statusVoucher}}
-								</md-option>							
-							</md-select>
-						</md-input-container>
 						<p  flex>
 							<md-button class="md-fab md-mini md-warn md-hue-2 " aria-label="tutup" ng-click="getAll()">					
 								<md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_youtube_searched_for_48px.svg"></md-icon>
 							</md-button>
-							<md-button class="md-fab md-mini md-primary md-hue-2 " aria-label="tutup" ng-click="loadIsi()">													
-								<md-icon md-svg-icon="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg"></md-icon>
-							</md-button>
-						</p>						
-					<!-- </div>					 -->
+						</p>										
 				</div>
-				<!-- <span flex></span> -->
 			</div>
 		</md-toolbar>
 
@@ -102,68 +86,7 @@
 								<md-icon md-svg-icon="images/material-design-icons-3.0.1/navigation/svg/production/ic_check_18px.svg" style="color:rgb(0, 0, 255)" ></md-icon>
 							</div>
 						</td> 
-						<td md-cell>
-
-						<!-- <md-fab-speed-dial md-direction="up" class="md-fling">
-  <md-fab-trigger>
-    <md-button aria-label="Add..."><md-icon icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon></md-button>
-  </md-fab-trigger>
-
-  <md-fab-actions>
-    <md-button aria-label="Add User">
-      <md-icon icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon>
-    </md-button>
-
-    <md-button aria-label="Add Group">
-      <md-icon icon="/img/icons/group.svg"></md-icon>
-    </md-button>
-  </md-fab-actions>
-</md-fab-speed-dial> -->
-<!-- 
-							<md-fab-speed-dial md-open="false" md-direction='left' selectedMode='md-scale' ng-mouseenter="true" ng-mouseleave="false">
-								<md-fab-trigger>
-									<md-button class="md-fab md-warn" aria-label="menu" >
-										<md-tooltip>
-							            	Open menu
-							          	</md-tooltip>
-										<md-icon md-svg-icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon>
-									</md-button>		
-								</md-fab-trigger>
-
-								<md-fab-action>
-									<md-button class="md-fab md-raised md-mini" aria-label="preview" ng-click='cetakJurnal(jurnal.id)'>
-										<md-tooltip>
-							            	Cetak {{jurnal.id}} - {{jurnal.jenisVoucher}}
-							          	</md-tooltip>
-										<md-icon md-svg-icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon>
-									</md-button>		
-									<md-button class="md-fab md-raised md-mini" aria-label="preview" ng-click='cetakJurnal(jurnal.id)'>
-										<md-tooltip>
-							            	Cetak {{jurnal.id}} - {{jurnal.jenisVoucher}}
-							          	</md-tooltip>
-										<md-icon md-svg-icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon>
-									</md-button>		
-								</md-fab-action>
-
-							</md-fab-speed-dial> -->
-
-<!-- 							<md-button class="md-primary" ng-click='edit(jurnal.id)'>Edit
-								<md-tooltip>
-					            	{{jurnal.id}} - {{jurnal.jenisVoucher}}
-					          	</md-tooltip>
-		          			</md-button>
-		          			<md-button class="md-fab md-mini md-primary md-hue-2" aria-label="preview" ng-click='cetakJurnal(jurnal.id)'>
-								<md-tooltip>
-					            	Cetak {{jurnal.id}} - {{jurnal.jenisVoucher}}
-					          	</md-tooltip>
-								<md-icon md-svg-icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon>
-							</md-button>							
-							<md-button class="md-warn" ng-click='deleteFisikVouc(jurnal.id, $event)'>Del
-								<md-tooltip>
-					            	{{jurnal.id}} - {{jurnal.jenisVoucher}}
-					          	</md-tooltip>
-		          			</md-button> -->
-<!-- md-icon-button -->
+						<td md-cell>					
 		          			<md-menu>
 								<md-button aria-label="Open action" class="md-fab md-raised md-mini md-warn"  ng-click="openMenu($mdOpenMenu, $event)" >
 									<md-icon md-menu-origin md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_list_24px.svg"></md-icon>
@@ -196,10 +119,7 @@
 							    </md-menu-content>
     						</md-menu>
 
-						</td>
-						<!-- <td><button type='button' class='btn btn-danger btn-block btn-sm'
-							ng-click='hapusDirektorat(direktorat.id,$index)'
-							>Delete</button> -->				
+						</td>			
 					</tr>		
 				</tbody>
 			</table>			

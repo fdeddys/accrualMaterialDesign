@@ -1,0 +1,131 @@
+<md-card>
+	<md-card-content>
+		<md-toolbar class="md-table-toolbar md-default" ng-show="!showCari" >
+			<div class="md-toolbar-tools">
+				<h4 class="md-headline">Buku Besar Trial</h4> 
+				<span flex></span>				
+				<md-button class="md-fab md-mini md-primary md-hue-2" aria-label="loadIsi" ng-click="loadIsi()">
+					<md-tooltip>
+		            	Cari data
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_swap_horiz_24px.svg"></md-icon>
+				</md-button>			
+				
+				<md-button class="md-fab md-mini md-primary md-hue-2 " aria-label="tambah" ng-click="addNew($event)">
+					<md-tooltip>
+		            	Tambah
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/av/svg/production/ic_playlist_add_48px.svg"></md-icon>
+				</md-button>
+
+				<md-button class="md-fab md-mini md-primary md-hue-2" aria-label="preview" ng-click='previewLaporan()'>
+					<md-tooltip>
+		            	Cetak
+		          	</md-tooltip>
+					<md-icon md-svg-icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon>
+				</md-button>
+				
+			</div>
+		</md-toolbar>
+
+		<md-toolbar class="md-table-toolbar md-default" ng-show="showCari">
+			
+			<div class="md-toolbar-tools">
+				<div layout="column">
+					<div >^-^</div>
+					<div layout="row">
+							<md-input-container >	
+								<md-autocomplete    	                                
+	                                md-no-cache="true"
+	                                md-selected-item="selectedCoa"
+	                                md-search-text="searchText"
+	                                md-items="coaHdr in getCoaDtlByKode(searchText)"
+	                                md-item-text="coaHdr.kodePerkiraan"                                
+	                                md-min-length="0"
+	                                md-autoselect="true"
+	                                md-floating-label="Kode COA" 	                                
+	                                id="kodeCoa"                           
+	                                >  
+	                                <md-item-template>
+	                                    <span md-highlight-text="searchText" md-highlight-flags="^i">[{{coaHdr.kodePerkiraan}}]-{{coaHdr.namaPerkiraan}}</span>
+	                                </md-item-template>
+	                                <md-not-found>
+	                                    Tidak ditemukan
+	                                </md-not-found>
+	                            </md-autocomplete> 
+
+							</md-input-container>
+							<!-- <md-input-container   >
+								<label>Cust </label>							
+							</md-input-container>	
+							<md-input-container   >
+								<label>Rel </label>							
+							</md-input-container>	
+							<md-input-container   >
+								<label>Bank </label>							
+							</md-input-container>	 -->
+
+							<p  flex>
+								<md-button class="md-fab md-mini md-warn md-hue-2 " aria-label="tutup" ng-click="getAll()">					
+									<md-icon md-svg-icon="images/material-design-icons-3.0.1/action/svg/production/ic_youtube_searched_for_48px.svg"></md-icon>
+								</md-button>
+								<md-button class="md-fab md-mini md-primary md-hue-2" aria-label="preview" ng-click='previewLaporanPerItem()'>
+									<md-tooltip>
+						            	Cetak
+						          	</md-tooltip>
+									<md-icon md-svg-icon="images/material-design-icons-3.0.1/image/svg/production/ic_picture_as_pdf_48px.svg"></md-icon>
+								</md-button>
+								<md-button class="md-fab md-mini md-primary md-hue-2 " aria-label="tutup" ng-click="loadIsi()">													
+									<md-icon md-svg-icon="images/material-design-icons-3.0.1/content/svg/production/ic_clear_24px.svg"></md-icon>
+								</md-button>
+							</p>											
+					</div>
+				</div>
+
+			</div>
+		</md-toolbar>
+		
+		<md-table-container >
+			<table md-table style="width:150%" >
+				<thead md-head  >
+					<tr md-row>
+						<th md-column style="color:rgb(128, 255, 128)"><span>Account</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Bookdate</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>No Voucher</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>No Urut</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Bagian</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Rel No</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Cust No</span></th>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Penerima</span></th>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Cash/Bank</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Keterangan</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Debet</span> </th> 
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Kredit</span> </th>
+						<th md-column style="color:rgb(128, 255, 128)" ><span>Saldo</span> </th> 
+					</tr>	
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat='bukuBesar in bukuBesars ' >
+						<td md-cell>{{bukuBesar.coaDtl.kodePerkiraan}}</td>
+						<td md-cell>{{bukuBesar.tglBooking| date:'dd-MMM-yyyy'}}</td>			
+						<td md-cell>{{bukuBesar.noVoucher }}</td>			
+						<td md-cell>{{bukuBesar.noUrut }}</td>				
+						<td md-cell>{{bukuBesar.bagian.kode }}</td> 
+						<td md-cell>{{bukuBesar.rel | uppercase }}</td> 
+						<td md-cell>{{bukuBesar.customer.nama | uppercase }}</td> 
+						<td md-cell>{{bukuBesar.penerima| uppercase }}</td> 
+						<td md-cell>{{bukuBesar.bank.nama | uppercase }}</td>
+						<td md-cell>{{bukuBesar.keterangan | uppercase }}</td> 
+						<td md-cell>{{bukuBesar.totalDebet | number }}</td> 
+						<td md-cell>{{bukuBesar.totalKredit | number }}</td>
+						<td md-cell>{{bukuBesar.total_berjalan| number }}</td>			
+					</tr>		
+				</tbody>
+			</table>			
+		</md-table-container>
+		
+		<md-table-pagination md-limit="itemsPerPage" md-page="currentPage" md-total="{{totalItems}}" md-on-paginate="getAll" ></md-table-pagination>
+	</md-card-content>
+</md-card>
+
+

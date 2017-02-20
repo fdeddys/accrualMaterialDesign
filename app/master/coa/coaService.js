@@ -97,6 +97,13 @@ appServices.factory('coaDtlFactory', ['$http','$rootScope', function($http,$root
 		});			
 	};
 
+	coaDtlFactory.getCoaAktifDtlByKodePage=function(kode, hal, jumlah, isMaster){		
+		return $http({
+			method:'GET',
+			url:urlApi + '/active/kode/' + kode + '/hal/' + hal + '/jumlah/' + jumlah // +'/isMaster/' + isMaster
+		});			
+	};
+
 	coaDtlFactory.getCoaDtlByNamaPage=function(nama, hal, jumlah, isMaster){		
 		return $http({
 			method:'GET',
