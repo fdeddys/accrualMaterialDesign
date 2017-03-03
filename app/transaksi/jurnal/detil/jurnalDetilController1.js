@@ -1,5 +1,5 @@
 appControllers.controller('jurnalDetilController', 
-	['$scope','jurnalHeaderFactory', '$window','$rootScope', '$filter','$location','$window',
+	['$scope','jurnalHeaderFactory',  '$window','$rootScope', '$filter','$location','$window',
 	'jurnalDetilFactory','$mdToast','coaDtlFactory','bankFactory','bagianFactory','accrualConfigFactory',
 	'$routeParams','customerFactory','focus','$location','$q','$mdDialog',
 	function($scope,jurnalHeaderFactory, $window, $rootScope,$filter, $location,$window,
@@ -18,10 +18,12 @@ appControllers.controller('jurnalDetilController',
 	var coaBank;
 	var coaKas;
 
+
 	var customers=[];
 
 	// hide isi detil
 	$scope.SimpanIsiDetil=true;
+
 	
 	// Edit Detil
 	$scope.editDetil=false;
@@ -83,6 +85,7 @@ appControllers.controller('jurnalDetilController',
 		jumlah:null,
 		tipeVoucher:null
 	};
+
 
 	// ENABLE bank - rel - cust
 	$scope.enableBank=false;
@@ -344,12 +347,7 @@ appControllers.controller('jurnalDetilController',
 		if($scope.selectedCoa===null){			
 			return false;	
 		}else{
-			if($scope.jurnalHeader.jenisVoucher==='PEMINDAHAN' && $scope.selectedCoa.kodePerkiraan.substring(0,1)==="2" && $scope.jurnalDetil.dk === "K"){
-				$scope.enableBank=true;					
-			}else{				
-				$scope.enableBank=false;
-			}
-			// $scope.enableBank=$scope.selectedCoa.cashBank;
+			$scope.enableBank=$scope.selectedCoa.cashBank;
 			$scope.enableRel = $scope.selectedCoa.rel;	  	
 
 			// *)JURNAL PENGELUARAN  ==> customer harus ENABLE
@@ -462,7 +460,7 @@ appControllers.controller('jurnalDetilController',
 		$scope.classWarnaJenisJurnal = "class"+$scope.jurnalHeader.jenisVoucher;
 		
 		if($scope.jurnalHeader.jenisVoucher==='PENGELUARAN'){
-			$scope.disableDibayarKe=false;		
+			$scope.disableDibayarKe=false;	
 			focus('idDibayarKe');
 		}else{
 			$scope.disableDibayarKe=true;
@@ -522,6 +520,12 @@ appControllers.controller('jurnalDetilController',
 					);				
 				return false;
 			}
+			//cek jika coa=2, maka kas/bank enabled, hanya berlaku u/ kredit
+			if($scope.selectedCoa.kodePerkiraan.substring(0,1)=='2' && $scope.jurnalDetil.dk == "K"){
+				$scope.jurnalDetil.bank=true
+			}else{
+				$scope.jurnalDetil.bank=false
+			}
 		}
 		// 1) END 
 
@@ -536,12 +540,17 @@ appControllers.controller('jurnalDetilController',
 					if ($scope.selectedCoa.kodePerkiraan == coaBank) {
 						validasiVoucPengeluaran = true
 					}
+
 				}
+				
+
 			}else{
 				validasiVoucPengeluaran =true
+				
 			}
 		}else{
 			validasiVoucPengeluaran =true
+		
 		}
 
 		if(validasiVoucPengeluaran == false){
@@ -553,13 +562,7 @@ appControllers.controller('jurnalDetilController',
 				);				
 			return false;			
 		}
-		//cek jika coa=2, maka kas/bank enabled, hanya berlaku u/ kredit
-			if($scope.jurnalHeader.jenisVoucher==='PEMINDAHAN' && $scope.selectedCoa.kodePerkiraan.substring(0,1)==="2" && $scope.jurnalDetil.dk === "K"){
-				$scope.enableBank=true;
-						
-			}else{
-				$scope.enableBank=false;
-			}
+
 		// 2) END
 
 
@@ -787,6 +790,7 @@ appControllers.controller('jurnalDetilController',
 		$scope.jurnalHeader.bookingDate=vTgl2;
 		$scope.jurnalHeader.user = $rootScope.globals.currentUser.authdata;			
 
+
 		jurnalHeaderFactory
 			.jurnalHeaderAdd($rootScope.globals.currentUser.authdata,$scope.jurnalHeader)
 			.success(function(data){
@@ -935,9 +939,9 @@ appControllers.controller('jurnalDetilController',
 				//cek jika coa=2, maka kas/bank enabled, hanya berlaku u/ kredit
 				if($scope.selectedCoa.kodePerkiraan.substring(0,1)=='2' && $scope.jurnalDetil.dk == "K"
 					&& $scope.jurnalHeader.jenisVoucher.jenisVoucher=='PEMINDAHAN'){
-					$scope.enableBank=true;
+					$scope.jurnalDetil.bank=true
 				}else{
-					$scope.enableBank=false;
+					$scope.jurnalDetil.bank=false
 				}
 				// $scope.enableBank=$scope.jurnalDetil.accountDetil.cashBank;
 		  		$scope.enableCust=$scope.jurnalDetil.accountDetil.cust;
@@ -1091,21 +1095,7 @@ appControllers.controller('jurnalDetilController',
     		// growl.addWarnMessage('Total debet / kredit tidak sama !!');
     		return false;
     	};    	
-    	//list no urut jurnal pembayaran otomatis yang dibuat
-    		if($scope.jurnalHeader.jenisVoucher==='PEMINDAHAN' && $scope.jurnalHeader.noUrut==null && $scope.jurnalHeader.noVoucher==null){
-		    	jurnalDetilFactory	
-		    		.getJurnalDetilPemindahanByIdJurnalHeader($scope.jurnalHeader.id)
-		    		.success(function(data){
-		    			$mdToast.show(	
-							$mdToast.simple()
-								.textContent(data)
-								.position("top right")
-								.hideDelay(10000)
-						);
 
-		    });
-
-    		}	
 		var vTgl1 = $filter('date')($scope.jurnalHeader.issueDate,'yyyy-MM-dd');
 
 		$scope.jurnalHeader.issueDate=vTgl1;
@@ -1115,12 +1105,14 @@ appControllers.controller('jurnalDetilController',
     	jurnalHeaderFactory
     		.saveJurnal($scope.jurnalHeader)
     		.success(function(data){
-    			$mdToast.show(	
+    			
+    		$mdToast.show(	
 					$mdToast.simple()
 						.textContent('Save success  !!')
 						.position("top right")
 						.hideDelay(5000)
 					);
+    		
     			var hasil=data;
     			// if(hasil==='Y'){
     				$scope.approved=true;
@@ -1132,12 +1124,14 @@ appControllers.controller('jurnalDetilController',
 					}else{
 						$scope.statusJurnalBalik='X';					
 					}
+
 					
     			// }else{
     			// 	growl.addWarnMessage('Error approve jurnal');
     			// }
-    		})	
-    };
+    		})
+    	
+    	}
 
     $scope.batal=function(){
     	$scope.StatusData='DISPLAY';			
@@ -1287,7 +1281,7 @@ appControllers.controller('jurnalDetilController',
 		   //   	$mdToast.show(	
 					// $mdToast.simple()
 					// 	.textContent('Batal delete : ' + new Date())
-					// 	.position("top right")
+					// 	.position("tsop right")
 					// 	.hideDelay(3000)
 					// );
 		      	
@@ -1302,6 +1296,8 @@ appControllers.controller('jurnalDetilController',
     $scope.previewLaporan=function(){
 		 $window.open($rootScope.pathServerJSON + '/laporan/jurnal/'+$scope.jurnalHeader.id, '_blank');
 	};
+
+	
 
 	startModule();
 

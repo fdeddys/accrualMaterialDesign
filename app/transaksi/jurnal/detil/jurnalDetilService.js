@@ -17,6 +17,13 @@ appServices.factory('jurnalDetilFactory', ['$http','$rootScope', function($http,
 			url:urlApi + '/' + id 
 		})
 	};
+	jurnalDetilFactory.getJurnalDetilPemindahanByIdJurnalHeader=function(id){
+
+		return $http({
+			method:'GET',
+			url:urlApi + '/listJurnalPemindahan/id/' + id 
+		})
+	};
 
 	jurnalDetilFactory.getJurnalDetilByIdJurnalHeaderPage=function(id, hal, jumlah){
 
@@ -78,7 +85,7 @@ appServices.factory('jurnalDetilFactory', ['$http','$rootScope', function($http,
 			method:'GET',
 			url:urlApi + '/listJurnalForInputBook/tglAwal/'+tglAwal+'/tglAkhir/'+tglAkhir+'/hal/'+hal+'/jumlah/'+jumlah
 		})
-	}
+	};
 
 	return jurnalDetilFactory;
 

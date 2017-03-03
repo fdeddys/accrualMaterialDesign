@@ -167,6 +167,7 @@ appControllers.controller('jurnalController',
 		 }	
 		
 	};
+	
 
 	startModule();
 
